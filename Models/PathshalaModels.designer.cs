@@ -33,6 +33,42 @@ namespace com.pathshala.Models
     partial void InsertSchool(School instance);
     partial void UpdateSchool(School instance);
     partial void DeleteSchool(School instance);
+    partial void InsertActivity(Activity instance);
+    partial void UpdateActivity(Activity instance);
+    partial void DeleteActivity(Activity instance);
+    partial void InsertAppUser(AppUser instance);
+    partial void UpdateAppUser(AppUser instance);
+    partial void DeleteAppUser(AppUser instance);
+    partial void InsertCICO(CICO instance);
+    partial void UpdateCICO(CICO instance);
+    partial void DeleteCICO(CICO instance);
+    partial void InsertFamilyMember(FamilyMember instance);
+    partial void UpdateFamilyMember(FamilyMember instance);
+    partial void DeleteFamilyMember(FamilyMember instance);
+    partial void InsertFamilyMemberStudent(FamilyMemberStudent instance);
+    partial void UpdateFamilyMemberStudent(FamilyMemberStudent instance);
+    partial void DeleteFamilyMemberStudent(FamilyMemberStudent instance);
+    partial void InsertGrade(Grade instance);
+    partial void UpdateGrade(Grade instance);
+    partial void DeleteGrade(Grade instance);
+    partial void InsertGradeStudent(GradeStudent instance);
+    partial void UpdateGradeStudent(GradeStudent instance);
+    partial void DeleteGradeStudent(GradeStudent instance);
+    partial void InsertLookup(Lookup instance);
+    partial void UpdateLookup(Lookup instance);
+    partial void DeleteLookup(Lookup instance);
+    partial void InsertMedical(Medical instance);
+    partial void UpdateMedical(Medical instance);
+    partial void DeleteMedical(Medical instance);
+    partial void InsertNotification(Notification instance);
+    partial void UpdateNotification(Notification instance);
+    partial void DeleteNotification(Notification instance);
+    partial void InsertStudent(Student instance);
+    partial void UpdateStudent(Student instance);
+    partial void DeleteStudent(Student instance);
+    partial void InsertTeacher(Teacher instance);
+    partial void UpdateTeacher(Teacher instance);
+    partial void DeleteTeacher(Teacher instance);
     #endregion
 		
 		public PathshalaModelsDataContext() : 
@@ -72,6 +108,102 @@ namespace com.pathshala.Models
 				return this.GetTable<School>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Activity> Activities
+		{
+			get
+			{
+				return this.GetTable<Activity>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AppUser> AppUsers
+		{
+			get
+			{
+				return this.GetTable<AppUser>();
+			}
+		}
+		
+		public System.Data.Linq.Table<CICO> CICOs
+		{
+			get
+			{
+				return this.GetTable<CICO>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FamilyMember> FamilyMembers
+		{
+			get
+			{
+				return this.GetTable<FamilyMember>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FamilyMemberStudent> FamilyMemberStudents
+		{
+			get
+			{
+				return this.GetTable<FamilyMemberStudent>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Grade> Grades
+		{
+			get
+			{
+				return this.GetTable<Grade>();
+			}
+		}
+		
+		public System.Data.Linq.Table<GradeStudent> GradeStudents
+		{
+			get
+			{
+				return this.GetTable<GradeStudent>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Lookup> Lookups
+		{
+			get
+			{
+				return this.GetTable<Lookup>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Medical> Medicals
+		{
+			get
+			{
+				return this.GetTable<Medical>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Notification> Notifications
+		{
+			get
+			{
+				return this.GetTable<Notification>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Student> Students
+		{
+			get
+			{
+				return this.GetTable<Student>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Teacher> Teachers
+		{
+			get
+			{
+				return this.GetTable<Teacher>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Schools")]
@@ -99,6 +231,14 @@ namespace com.pathshala.Models
 		private string _YouTubeUrl;
 		
 		private string _TwiterUrl;
+		
+		private EntitySet<CICO> _CICOs;
+		
+		private EntitySet<Grade> _Grades;
+		
+		private EntitySet<Student> _Students;
+		
+		private EntitySet<Teacher> _Teachers;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -128,6 +268,10 @@ namespace com.pathshala.Models
 		
 		public School()
 		{
+			this._CICOs = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs), new Action<CICO>(this.detach_CICOs));
+			this._Grades = new EntitySet<Grade>(new Action<Grade>(this.attach_Grades), new Action<Grade>(this.detach_Grades));
+			this._Students = new EntitySet<Student>(new Action<Student>(this.attach_Students), new Action<Student>(this.detach_Students));
+			this._Teachers = new EntitySet<Teacher>(new Action<Teacher>(this.attach_Teachers), new Action<Teacher>(this.detach_Teachers));
 			OnCreated();
 		}
 		
@@ -171,7 +315,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_About", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_About", DbType="VarBinary(MAX)", CanBeNull=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary About
 		{
 			get
@@ -331,6 +475,58 @@ namespace com.pathshala.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="StudentID")]
+		public EntitySet<CICO> CICOs
+		{
+			get
+			{
+				return this._CICOs;
+			}
+			set
+			{
+				this._CICOs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Grade", Storage="_Grades", ThisKey="ID", OtherKey="SchoolID")]
+		public EntitySet<Grade> Grades
+		{
+			get
+			{
+				return this._Grades;
+			}
+			set
+			{
+				this._Grades.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Student", Storage="_Students", ThisKey="ID", OtherKey="SchoolID")]
+		public EntitySet<Student> Students
+		{
+			get
+			{
+				return this._Students;
+			}
+			set
+			{
+				this._Students.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Teacher", Storage="_Teachers", ThisKey="ID", OtherKey="SchoolID")]
+		public EntitySet<Teacher> Teachers
+		{
+			get
+			{
+				return this._Teachers;
+			}
+			set
+			{
+				this._Teachers.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -349,6 +545,3392 @@ namespace com.pathshala.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_CICOs(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = this;
+		}
+		
+		private void detach_CICOs(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = null;
+		}
+		
+		private void attach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = this;
+		}
+		
+		private void detach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = null;
+		}
+		
+		private void attach_Students(Student entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = this;
+		}
+		
+		private void detach_Students(Student entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = null;
+		}
+		
+		private void attach_Teachers(Teacher entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = this;
+		}
+		
+		private void detach_Teachers(Teacher entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Activities")]
+	public partial class Activity : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _StudentID;
+		
+		private System.Nullable<int> _ActivityType;
+		
+		private System.Nullable<bool> _Notified;
+		
+		private string _Message;
+		
+		private System.Data.Linq.Binary _ActivityOn;
+		
+		private EntitySet<Notification> _Notifications;
+		
+		private EntityRef<Lookup> _Lookup;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    partial void OnActivityTypeChanging(System.Nullable<int> value);
+    partial void OnActivityTypeChanged();
+    partial void OnNotifiedChanging(System.Nullable<bool> value);
+    partial void OnNotifiedChanged();
+    partial void OnMessageChanging(string value);
+    partial void OnMessageChanged();
+    partial void OnActivityOnChanging(System.Data.Linq.Binary value);
+    partial void OnActivityOnChanged();
+    #endregion
+		
+		public Activity()
+		{
+			this._Notifications = new EntitySet<Notification>(new Action<Notification>(this.attach_Notifications), new Action<Notification>(this.detach_Notifications));
+			this._Lookup = default(EntityRef<Lookup>);
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> StudentID
+		{
+			get
+			{
+				return this._StudentID;
+			}
+			set
+			{
+				if ((this._StudentID != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityType", DbType="Int", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> ActivityType
+		{
+			get
+			{
+				return this._ActivityType;
+			}
+			set
+			{
+				if ((this._ActivityType != value))
+				{
+					if (this._Lookup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnActivityTypeChanging(value);
+					this.SendPropertyChanging();
+					this._ActivityType = value;
+					this.SendPropertyChanged("ActivityType");
+					this.OnActivityTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notified", DbType="Bit", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<bool> Notified
+		{
+			get
+			{
+				return this._Notified;
+			}
+			set
+			{
+				if ((this._Notified != value))
+				{
+					this.OnNotifiedChanging(value);
+					this.SendPropertyChanging();
+					this._Notified = value;
+					this.SendPropertyChanged("Notified");
+					this.OnNotifiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Message", DbType="VarChar(150)", UpdateCheck=UpdateCheck.Never)]
+		public string Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				if ((this._Message != value))
+				{
+					this.OnMessageChanging(value);
+					this.SendPropertyChanging();
+					this._Message = value;
+					this.SendPropertyChanged("Message");
+					this.OnMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityOn", AutoSync=AutoSync.Always, DbType="rowversion", CanBeNull=true, IsDbGenerated=true, IsVersion=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary ActivityOn
+		{
+			get
+			{
+				return this._ActivityOn;
+			}
+			set
+			{
+				if ((this._ActivityOn != value))
+				{
+					this.OnActivityOnChanging(value);
+					this.SendPropertyChanging();
+					this._ActivityOn = value;
+					this.SendPropertyChanged("ActivityOn");
+					this.OnActivityOnChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_Notification", Storage="_Notifications", ThisKey="ID", OtherKey="ActivityID")]
+		public EntitySet<Notification> Notifications
+		{
+			get
+			{
+				return this._Notifications;
+			}
+			set
+			{
+				this._Notifications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Activity", Storage="_Lookup", ThisKey="ActivityType", OtherKey="ID", IsForeignKey=true)]
+		public Lookup Lookup
+		{
+			get
+			{
+				return this._Lookup.Entity;
+			}
+			set
+			{
+				Lookup previousValue = this._Lookup.Entity;
+				if (((previousValue != value) 
+							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lookup.Entity = null;
+						previousValue.Activities.Remove(this);
+					}
+					this._Lookup.Entity = value;
+					if ((value != null))
+					{
+						value.Activities.Add(this);
+						this._ActivityType = value.ID;
+					}
+					else
+					{
+						this._ActivityType = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Lookup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Activity", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.Activities.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.Activities.Add(this);
+						this._StudentID = value.ID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Notifications(Notification entity)
+		{
+			this.SendPropertyChanging();
+			entity.Activity = this;
+		}
+		
+		private void detach_Notifications(Notification entity)
+		{
+			this.SendPropertyChanging();
+			entity.Activity = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AppUsers")]
+	public partial class AppUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Username;
+		
+		private string _Password;
+		
+		private System.Nullable<bool> _IsFacbookLogin;
+		
+		private System.Nullable<bool> _IsGoogleLogin;
+		
+		private string _Email;
+		
+		private System.Nullable<bool> _IsActive;
+		
+		private System.Nullable<bool> _IsVerified;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnIsFacbookLoginChanging(System.Nullable<bool> value);
+    partial void OnIsFacbookLoginChanged();
+    partial void OnIsGoogleLoginChanging(System.Nullable<bool> value);
+    partial void OnIsGoogleLoginChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnIsActiveChanging(System.Nullable<bool> value);
+    partial void OnIsActiveChanged();
+    partial void OnIsVerifiedChanging(System.Nullable<bool> value);
+    partial void OnIsVerifiedChanged();
+    #endregion
+		
+		public AppUser()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50)")]
+		public string Username
+		{
+			get
+			{
+				return this._Username;
+			}
+			set
+			{
+				if ((this._Username != value))
+				{
+					this.OnUsernameChanging(value);
+					this.SendPropertyChanging();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(500)")]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsFacbookLogin", DbType="Bit")]
+		public System.Nullable<bool> IsFacbookLogin
+		{
+			get
+			{
+				return this._IsFacbookLogin;
+			}
+			set
+			{
+				if ((this._IsFacbookLogin != value))
+				{
+					this.OnIsFacbookLoginChanging(value);
+					this.SendPropertyChanging();
+					this._IsFacbookLogin = value;
+					this.SendPropertyChanged("IsFacbookLogin");
+					this.OnIsFacbookLoginChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsGoogleLogin", DbType="Bit")]
+		public System.Nullable<bool> IsGoogleLogin
+		{
+			get
+			{
+				return this._IsGoogleLogin;
+			}
+			set
+			{
+				if ((this._IsGoogleLogin != value))
+				{
+					this.OnIsGoogleLoginChanging(value);
+					this.SendPropertyChanging();
+					this._IsGoogleLogin = value;
+					this.SendPropertyChanged("IsGoogleLogin");
+					this.OnIsGoogleLoginChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit")]
+		public System.Nullable<bool> IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsVerified", DbType="Bit")]
+		public System.Nullable<bool> IsVerified
+		{
+			get
+			{
+				return this._IsVerified;
+			}
+			set
+			{
+				if ((this._IsVerified != value))
+				{
+					this.OnIsVerifiedChanging(value);
+					this.SendPropertyChanging();
+					this._IsVerified = value;
+					this.SendPropertyChanged("IsVerified");
+					this.OnIsVerifiedChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.CICOs")]
+	public partial class CICO : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _StudentID;
+		
+		private System.Nullable<System.DateTime> _CheckedIn;
+		
+		private System.Nullable<int> _CheckedInBy;
+		
+		private System.Nullable<System.DateTime> _CheckedOut;
+		
+		private System.Nullable<int> _CheckedOutBy;
+		
+		private EntityRef<School> _School;
+		
+		private EntityRef<FamilyMemberStudent> _FamilyMemberStudent;
+		
+		private EntityRef<FamilyMemberStudent> _FamilyMemberStudent1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    partial void OnCheckedInChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckedInChanged();
+    partial void OnCheckedInByChanging(System.Nullable<int> value);
+    partial void OnCheckedInByChanged();
+    partial void OnCheckedOutChanging(System.Nullable<System.DateTime> value);
+    partial void OnCheckedOutChanged();
+    partial void OnCheckedOutByChanging(System.Nullable<int> value);
+    partial void OnCheckedOutByChanged();
+    #endregion
+		
+		public CICO()
+		{
+			this._School = default(EntityRef<School>);
+			this._FamilyMemberStudent = default(EntityRef<FamilyMemberStudent>);
+			this._FamilyMemberStudent1 = default(EntityRef<FamilyMemberStudent>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
+		public System.Nullable<int> StudentID
+		{
+			get
+			{
+				return this._StudentID;
+			}
+			set
+			{
+				if ((this._StudentID != value))
+				{
+					if (this._School.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckedIn", DbType="DateTime2")]
+		public System.Nullable<System.DateTime> CheckedIn
+		{
+			get
+			{
+				return this._CheckedIn;
+			}
+			set
+			{
+				if ((this._CheckedIn != value))
+				{
+					this.OnCheckedInChanging(value);
+					this.SendPropertyChanging();
+					this._CheckedIn = value;
+					this.SendPropertyChanged("CheckedIn");
+					this.OnCheckedInChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckedInBy", DbType="Int")]
+		public System.Nullable<int> CheckedInBy
+		{
+			get
+			{
+				return this._CheckedInBy;
+			}
+			set
+			{
+				if ((this._CheckedInBy != value))
+				{
+					if (this._FamilyMemberStudent.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCheckedInByChanging(value);
+					this.SendPropertyChanging();
+					this._CheckedInBy = value;
+					this.SendPropertyChanged("CheckedInBy");
+					this.OnCheckedInByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckedOut", DbType="DateTime2")]
+		public System.Nullable<System.DateTime> CheckedOut
+		{
+			get
+			{
+				return this._CheckedOut;
+			}
+			set
+			{
+				if ((this._CheckedOut != value))
+				{
+					this.OnCheckedOutChanging(value);
+					this.SendPropertyChanging();
+					this._CheckedOut = value;
+					this.SendPropertyChanged("CheckedOut");
+					this.OnCheckedOutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CheckedOutBy", DbType="Int")]
+		public System.Nullable<int> CheckedOutBy
+		{
+			get
+			{
+				return this._CheckedOutBy;
+			}
+			set
+			{
+				if ((this._CheckedOutBy != value))
+				{
+					if (this._FamilyMemberStudent1.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnCheckedOutByChanging(value);
+					this.SendPropertyChanging();
+					this._CheckedOutBy = value;
+					this.SendPropertyChanged("CheckedOutBy");
+					this.OnCheckedOutByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_CICO", Storage="_School", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		public School School
+		{
+			get
+			{
+				return this._School.Entity;
+			}
+			set
+			{
+				School previousValue = this._School.Entity;
+				if (((previousValue != value) 
+							|| (this._School.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._School.Entity = null;
+						previousValue.CICOs.Remove(this);
+					}
+					this._School.Entity = value;
+					if ((value != null))
+					{
+						value.CICOs.Add(this);
+						this._StudentID = value.ID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("School");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO", Storage="_FamilyMemberStudent", ThisKey="CheckedInBy", OtherKey="ID", IsForeignKey=true)]
+		public FamilyMemberStudent FamilyMemberStudent
+		{
+			get
+			{
+				return this._FamilyMemberStudent.Entity;
+			}
+			set
+			{
+				FamilyMemberStudent previousValue = this._FamilyMemberStudent.Entity;
+				if (((previousValue != value) 
+							|| (this._FamilyMemberStudent.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FamilyMemberStudent.Entity = null;
+						previousValue.CICOs.Remove(this);
+					}
+					this._FamilyMemberStudent.Entity = value;
+					if ((value != null))
+					{
+						value.CICOs.Add(this);
+						this._CheckedInBy = value.ID;
+					}
+					else
+					{
+						this._CheckedInBy = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("FamilyMemberStudent");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO1", Storage="_FamilyMemberStudent1", ThisKey="CheckedOutBy", OtherKey="ID", IsForeignKey=true)]
+		public FamilyMemberStudent FamilyMemberStudent1
+		{
+			get
+			{
+				return this._FamilyMemberStudent1.Entity;
+			}
+			set
+			{
+				FamilyMemberStudent previousValue = this._FamilyMemberStudent1.Entity;
+				if (((previousValue != value) 
+							|| (this._FamilyMemberStudent1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FamilyMemberStudent1.Entity = null;
+						previousValue.CICOs1.Remove(this);
+					}
+					this._FamilyMemberStudent1.Entity = value;
+					if ((value != null))
+					{
+						value.CICOs1.Add(this);
+						this._CheckedOutBy = value.ID;
+					}
+					else
+					{
+						this._CheckedOutBy = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("FamilyMemberStudent1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FamilyMembers")]
+	public partial class FamilyMember : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private string _Phone;
+		
+		private string _Email;
+		
+		private string _MobilePhone;
+		
+		private bool _TextToMobile;
+		
+		private System.Nullable<int> _CICOCode;
+		
+		private string _EmergencyContact;
+		
+		private string _EmergencyContactPerson;
+		
+		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnMobilePhoneChanging(string value);
+    partial void OnMobilePhoneChanged();
+    partial void OnTextToMobileChanging(bool value);
+    partial void OnTextToMobileChanged();
+    partial void OnCICOCodeChanging(System.Nullable<int> value);
+    partial void OnCICOCodeChanged();
+    partial void OnEmergencyContactChanging(string value);
+    partial void OnEmergencyContactChanged();
+    partial void OnEmergencyContactPersonChanging(string value);
+    partial void OnEmergencyContactPersonChanged();
+    #endregion
+		
+		public FamilyMember()
+		{
+			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(10)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(250)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MobilePhone", DbType="VarChar(15)")]
+		public string MobilePhone
+		{
+			get
+			{
+				return this._MobilePhone;
+			}
+			set
+			{
+				if ((this._MobilePhone != value))
+				{
+					this.OnMobilePhoneChanging(value);
+					this.SendPropertyChanging();
+					this._MobilePhone = value;
+					this.SendPropertyChanged("MobilePhone");
+					this.OnMobilePhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TextToMobile", DbType="Bit NOT NULL")]
+		public bool TextToMobile
+		{
+			get
+			{
+				return this._TextToMobile;
+			}
+			set
+			{
+				if ((this._TextToMobile != value))
+				{
+					this.OnTextToMobileChanging(value);
+					this.SendPropertyChanging();
+					this._TextToMobile = value;
+					this.SendPropertyChanged("TextToMobile");
+					this.OnTextToMobileChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CICOCode", DbType="Int")]
+		public System.Nullable<int> CICOCode
+		{
+			get
+			{
+				return this._CICOCode;
+			}
+			set
+			{
+				if ((this._CICOCode != value))
+				{
+					this.OnCICOCodeChanging(value);
+					this.SendPropertyChanging();
+					this._CICOCode = value;
+					this.SendPropertyChanged("CICOCode");
+					this.OnCICOCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContact", DbType="VarChar(10)")]
+		public string EmergencyContact
+		{
+			get
+			{
+				return this._EmergencyContact;
+			}
+			set
+			{
+				if ((this._EmergencyContact != value))
+				{
+					this.OnEmergencyContactChanging(value);
+					this.SendPropertyChanging();
+					this._EmergencyContact = value;
+					this.SendPropertyChanged("EmergencyContact");
+					this.OnEmergencyContactChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmergencyContactPerson", DbType="VarChar(150)")]
+		public string EmergencyContactPerson
+		{
+			get
+			{
+				return this._EmergencyContactPerson;
+			}
+			set
+			{
+				if ((this._EmergencyContactPerson != value))
+				{
+					this.OnEmergencyContactPersonChanging(value);
+					this.SendPropertyChanging();
+					this._EmergencyContactPerson = value;
+					this.SendPropertyChanged("EmergencyContactPerson");
+					this.OnEmergencyContactPersonChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="FamilyMemberID")]
+		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
+		{
+			get
+			{
+				return this._FamilyMemberStudents;
+			}
+			set
+			{
+				this._FamilyMemberStudents.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMember = this;
+		}
+		
+		private void detach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMember = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FamilyMemberStudents")]
+	public partial class FamilyMemberStudent : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _StudentID;
+		
+		private System.Nullable<int> _FamilyMemberID;
+		
+		private System.Nullable<int> _RelationshipTypeID;
+		
+		private EntitySet<CICO> _CICOs;
+		
+		private EntitySet<CICO> _CICOs1;
+		
+		private EntityRef<FamilyMember> _FamilyMember;
+		
+		private EntityRef<Lookup> _Lookup;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    partial void OnFamilyMemberIDChanging(System.Nullable<int> value);
+    partial void OnFamilyMemberIDChanged();
+    partial void OnRelationshipTypeIDChanging(System.Nullable<int> value);
+    partial void OnRelationshipTypeIDChanged();
+    #endregion
+		
+		public FamilyMemberStudent()
+		{
+			this._CICOs = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs), new Action<CICO>(this.detach_CICOs));
+			this._CICOs1 = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs1), new Action<CICO>(this.detach_CICOs1));
+			this._FamilyMember = default(EntityRef<FamilyMember>);
+			this._Lookup = default(EntityRef<Lookup>);
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
+		public System.Nullable<int> StudentID
+		{
+			get
+			{
+				return this._StudentID;
+			}
+			set
+			{
+				if ((this._StudentID != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FamilyMemberID", DbType="Int")]
+		public System.Nullable<int> FamilyMemberID
+		{
+			get
+			{
+				return this._FamilyMemberID;
+			}
+			set
+			{
+				if ((this._FamilyMemberID != value))
+				{
+					if (this._FamilyMember.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFamilyMemberIDChanging(value);
+					this.SendPropertyChanging();
+					this._FamilyMemberID = value;
+					this.SendPropertyChanged("FamilyMemberID");
+					this.OnFamilyMemberIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelationshipTypeID", DbType="Int")]
+		public System.Nullable<int> RelationshipTypeID
+		{
+			get
+			{
+				return this._RelationshipTypeID;
+			}
+			set
+			{
+				if ((this._RelationshipTypeID != value))
+				{
+					if (this._Lookup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRelationshipTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._RelationshipTypeID = value;
+					this.SendPropertyChanged("RelationshipTypeID");
+					this.OnRelationshipTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="CheckedInBy")]
+		public EntitySet<CICO> CICOs
+		{
+			get
+			{
+				return this._CICOs;
+			}
+			set
+			{
+				this._CICOs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO1", Storage="_CICOs1", ThisKey="ID", OtherKey="CheckedOutBy")]
+		public EntitySet<CICO> CICOs1
+		{
+			get
+			{
+				return this._CICOs1;
+			}
+			set
+			{
+				this._CICOs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent", Storage="_FamilyMember", ThisKey="FamilyMemberID", OtherKey="ID", IsForeignKey=true)]
+		public FamilyMember FamilyMember
+		{
+			get
+			{
+				return this._FamilyMember.Entity;
+			}
+			set
+			{
+				FamilyMember previousValue = this._FamilyMember.Entity;
+				if (((previousValue != value) 
+							|| (this._FamilyMember.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FamilyMember.Entity = null;
+						previousValue.FamilyMemberStudents.Remove(this);
+					}
+					this._FamilyMember.Entity = value;
+					if ((value != null))
+					{
+						value.FamilyMemberStudents.Add(this);
+						this._FamilyMemberID = value.ID;
+					}
+					else
+					{
+						this._FamilyMemberID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("FamilyMember");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_FamilyMemberStudent", Storage="_Lookup", ThisKey="RelationshipTypeID", OtherKey="ID", IsForeignKey=true)]
+		public Lookup Lookup
+		{
+			get
+			{
+				return this._Lookup.Entity;
+			}
+			set
+			{
+				Lookup previousValue = this._Lookup.Entity;
+				if (((previousValue != value) 
+							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lookup.Entity = null;
+						previousValue.FamilyMemberStudents.Remove(this);
+					}
+					this._Lookup.Entity = value;
+					if ((value != null))
+					{
+						value.FamilyMemberStudents.Add(this);
+						this._RelationshipTypeID = value.ID;
+					}
+					else
+					{
+						this._RelationshipTypeID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Lookup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.FamilyMemberStudents.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.FamilyMemberStudents.Add(this);
+						this._StudentID = value.ID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CICOs(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMemberStudent = this;
+		}
+		
+		private void detach_CICOs(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMemberStudent = null;
+		}
+		
+		private void attach_CICOs1(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMemberStudent1 = this;
+		}
+		
+		private void detach_CICOs1(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMemberStudent1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Grades")]
+	public partial class Grade : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _GradeLookupID;
+		
+		private System.Nullable<int> _TeacherID;
+		
+		private System.Nullable<int> _SchoolID;
+		
+		private EntitySet<GradeStudent> _GradeStudents;
+		
+		private EntityRef<School> _School;
+		
+		private EntityRef<Lookup> _Lookup;
+		
+		private EntityRef<Teacher> _Teacher;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnGradeLookupIDChanging(System.Nullable<int> value);
+    partial void OnGradeLookupIDChanged();
+    partial void OnTeacherIDChanging(System.Nullable<int> value);
+    partial void OnTeacherIDChanged();
+    partial void OnSchoolIDChanging(System.Nullable<int> value);
+    partial void OnSchoolIDChanged();
+    #endregion
+		
+		public Grade()
+		{
+			this._GradeStudents = new EntitySet<GradeStudent>(new Action<GradeStudent>(this.attach_GradeStudents), new Action<GradeStudent>(this.detach_GradeStudents));
+			this._School = default(EntityRef<School>);
+			this._Lookup = default(EntityRef<Lookup>);
+			this._Teacher = default(EntityRef<Teacher>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GradeLookupID", DbType="Int")]
+		public System.Nullable<int> GradeLookupID
+		{
+			get
+			{
+				return this._GradeLookupID;
+			}
+			set
+			{
+				if ((this._GradeLookupID != value))
+				{
+					if (this._Lookup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGradeLookupIDChanging(value);
+					this.SendPropertyChanging();
+					this._GradeLookupID = value;
+					this.SendPropertyChanged("GradeLookupID");
+					this.OnGradeLookupIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeacherID", DbType="Int")]
+		public System.Nullable<int> TeacherID
+		{
+			get
+			{
+				return this._TeacherID;
+			}
+			set
+			{
+				if ((this._TeacherID != value))
+				{
+					if (this._Teacher.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTeacherIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeacherID = value;
+					this.SendPropertyChanged("TeacherID");
+					this.OnTeacherIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SchoolID", DbType="Int")]
+		public System.Nullable<int> SchoolID
+		{
+			get
+			{
+				return this._SchoolID;
+			}
+			set
+			{
+				if ((this._SchoolID != value))
+				{
+					if (this._School.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSchoolIDChanging(value);
+					this.SendPropertyChanging();
+					this._SchoolID = value;
+					this.SendPropertyChanged("SchoolID");
+					this.OnSchoolIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Grade_GradeStudent", Storage="_GradeStudents", ThisKey="ID", OtherKey="GradeID")]
+		public EntitySet<GradeStudent> GradeStudents
+		{
+			get
+			{
+				return this._GradeStudents;
+			}
+			set
+			{
+				this._GradeStudents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Grade", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		public School School
+		{
+			get
+			{
+				return this._School.Entity;
+			}
+			set
+			{
+				School previousValue = this._School.Entity;
+				if (((previousValue != value) 
+							|| (this._School.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._School.Entity = null;
+						previousValue.Grades.Remove(this);
+					}
+					this._School.Entity = value;
+					if ((value != null))
+					{
+						value.Grades.Add(this);
+						this._SchoolID = value.ID;
+					}
+					else
+					{
+						this._SchoolID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("School");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Grade", Storage="_Lookup", ThisKey="GradeLookupID", OtherKey="ID", IsForeignKey=true)]
+		public Lookup Lookup
+		{
+			get
+			{
+				return this._Lookup.Entity;
+			}
+			set
+			{
+				Lookup previousValue = this._Lookup.Entity;
+				if (((previousValue != value) 
+							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lookup.Entity = null;
+						previousValue.Grades.Remove(this);
+					}
+					this._Lookup.Entity = value;
+					if ((value != null))
+					{
+						value.Grades.Add(this);
+						this._GradeLookupID = value.ID;
+					}
+					else
+					{
+						this._GradeLookupID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Lookup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Teacher_Grade", Storage="_Teacher", ThisKey="TeacherID", OtherKey="ID", IsForeignKey=true)]
+		public Teacher Teacher
+		{
+			get
+			{
+				return this._Teacher.Entity;
+			}
+			set
+			{
+				Teacher previousValue = this._Teacher.Entity;
+				if (((previousValue != value) 
+							|| (this._Teacher.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Teacher.Entity = null;
+						previousValue.Grades.Remove(this);
+					}
+					this._Teacher.Entity = value;
+					if ((value != null))
+					{
+						value.Grades.Add(this);
+						this._TeacherID = value.ID;
+					}
+					else
+					{
+						this._TeacherID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Teacher");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_GradeStudents(GradeStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Grade = this;
+		}
+		
+		private void detach_GradeStudents(GradeStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Grade = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.GradeStudents")]
+	public partial class GradeStudent : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _GradeID;
+		
+		private System.Nullable<int> _StudentID;
+		
+		private EntityRef<Grade> _Grade;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnGradeIDChanging(System.Nullable<int> value);
+    partial void OnGradeIDChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    #endregion
+		
+		public GradeStudent()
+		{
+			this._Grade = default(EntityRef<Grade>);
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GradeID", DbType="Int")]
+		public System.Nullable<int> GradeID
+		{
+			get
+			{
+				return this._GradeID;
+			}
+			set
+			{
+				if ((this._GradeID != value))
+				{
+					if (this._Grade.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnGradeIDChanging(value);
+					this.SendPropertyChanging();
+					this._GradeID = value;
+					this.SendPropertyChanged("GradeID");
+					this.OnGradeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
+		public System.Nullable<int> StudentID
+		{
+			get
+			{
+				return this._StudentID;
+			}
+			set
+			{
+				if ((this._StudentID != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Grade_GradeStudent", Storage="_Grade", ThisKey="GradeID", OtherKey="ID", IsForeignKey=true)]
+		public Grade Grade
+		{
+			get
+			{
+				return this._Grade.Entity;
+			}
+			set
+			{
+				Grade previousValue = this._Grade.Entity;
+				if (((previousValue != value) 
+							|| (this._Grade.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Grade.Entity = null;
+						previousValue.GradeStudents.Remove(this);
+					}
+					this._Grade.Entity = value;
+					if ((value != null))
+					{
+						value.GradeStudents.Add(this);
+						this._GradeID = value.ID;
+					}
+					else
+					{
+						this._GradeID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Grade");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_GradeStudent", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.GradeStudents.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.GradeStudents.Add(this);
+						this._StudentID = value.ID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Lookups")]
+	public partial class Lookup : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _LookupKey;
+		
+		private string _LookupValue;
+		
+		private EntitySet<Activity> _Activities;
+		
+		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
+		
+		private EntitySet<Grade> _Grades;
+		
+		private EntitySet<Notification> _Notifications;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnLookupKeyChanging(string value);
+    partial void OnLookupKeyChanged();
+    partial void OnLookupValueChanging(string value);
+    partial void OnLookupValueChanged();
+    #endregion
+		
+		public Lookup()
+		{
+			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
+			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
+			this._Grades = new EntitySet<Grade>(new Action<Grade>(this.attach_Grades), new Action<Grade>(this.detach_Grades));
+			this._Notifications = new EntitySet<Notification>(new Action<Notification>(this.attach_Notifications), new Action<Notification>(this.detach_Notifications));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LookupKey", DbType="VarChar(50)")]
+		public string LookupKey
+		{
+			get
+			{
+				return this._LookupKey;
+			}
+			set
+			{
+				if ((this._LookupKey != value))
+				{
+					this.OnLookupKeyChanging(value);
+					this.SendPropertyChanging();
+					this._LookupKey = value;
+					this.SendPropertyChanged("LookupKey");
+					this.OnLookupKeyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LookupValue", DbType="VarChar(500)")]
+		public string LookupValue
+		{
+			get
+			{
+				return this._LookupValue;
+			}
+			set
+			{
+				if ((this._LookupValue != value))
+				{
+					this.OnLookupValueChanging(value);
+					this.SendPropertyChanging();
+					this._LookupValue = value;
+					this.SendPropertyChanged("LookupValue");
+					this.OnLookupValueChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Activity", Storage="_Activities", ThisKey="ID", OtherKey="ActivityType")]
+		public EntitySet<Activity> Activities
+		{
+			get
+			{
+				return this._Activities;
+			}
+			set
+			{
+				this._Activities.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="RelationshipTypeID")]
+		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
+		{
+			get
+			{
+				return this._FamilyMemberStudents;
+			}
+			set
+			{
+				this._FamilyMemberStudents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Grade", Storage="_Grades", ThisKey="ID", OtherKey="GradeLookupID")]
+		public EntitySet<Grade> Grades
+		{
+			get
+			{
+				return this._Grades;
+			}
+			set
+			{
+				this._Grades.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Notification", Storage="_Notifications", ThisKey="ID", OtherKey="NotificationType")]
+		public EntitySet<Notification> Notifications
+		{
+			get
+			{
+				return this._Notifications;
+			}
+			set
+			{
+				this._Notifications.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
+		}
+		
+		private void attach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
+		}
+		
+		private void attach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
+		}
+		
+		private void attach_Notifications(Notification entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_Notifications(Notification entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Medicals")]
+	public partial class Medical : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _StudentID;
+		
+		private string _Hospital;
+		
+		private string _MedicalDoctor;
+		
+		private string _MedicalPhone;
+		
+		private string _MedicalAddress;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    partial void OnHospitalChanging(string value);
+    partial void OnHospitalChanged();
+    partial void OnMedicalDoctorChanging(string value);
+    partial void OnMedicalDoctorChanged();
+    partial void OnMedicalPhoneChanging(string value);
+    partial void OnMedicalPhoneChanged();
+    partial void OnMedicalAddressChanging(string value);
+    partial void OnMedicalAddressChanged();
+    #endregion
+		
+		public Medical()
+		{
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
+		public System.Nullable<int> StudentID
+		{
+			get
+			{
+				return this._StudentID;
+			}
+			set
+			{
+				if ((this._StudentID != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hospital", DbType="VarChar(250)")]
+		public string Hospital
+		{
+			get
+			{
+				return this._Hospital;
+			}
+			set
+			{
+				if ((this._Hospital != value))
+				{
+					this.OnHospitalChanging(value);
+					this.SendPropertyChanging();
+					this._Hospital = value;
+					this.SendPropertyChanged("Hospital");
+					this.OnHospitalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MedicalDoctor", DbType="VarChar(50)")]
+		public string MedicalDoctor
+		{
+			get
+			{
+				return this._MedicalDoctor;
+			}
+			set
+			{
+				if ((this._MedicalDoctor != value))
+				{
+					this.OnMedicalDoctorChanging(value);
+					this.SendPropertyChanging();
+					this._MedicalDoctor = value;
+					this.SendPropertyChanged("MedicalDoctor");
+					this.OnMedicalDoctorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MedicalPhone", DbType="VarChar(15)")]
+		public string MedicalPhone
+		{
+			get
+			{
+				return this._MedicalPhone;
+			}
+			set
+			{
+				if ((this._MedicalPhone != value))
+				{
+					this.OnMedicalPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._MedicalPhone = value;
+					this.SendPropertyChanged("MedicalPhone");
+					this.OnMedicalPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MedicalAddress", DbType="VarChar(500)")]
+		public string MedicalAddress
+		{
+			get
+			{
+				return this._MedicalAddress;
+			}
+			set
+			{
+				if ((this._MedicalAddress != value))
+				{
+					this.OnMedicalAddressChanging(value);
+					this.SendPropertyChanging();
+					this._MedicalAddress = value;
+					this.SendPropertyChanged("MedicalAddress");
+					this.OnMedicalAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Medical", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.Medicals.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.Medicals.Add(this);
+						this._StudentID = value.ID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Notifications")]
+	public partial class Notification : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _ActivityID;
+		
+		private string _Receipient;
+		
+		private System.Nullable<int> _NotificationType;
+		
+		private string _AdditionalMessage;
+		
+		private System.Nullable<bool> _IsPublic;
+		
+		private EntityRef<Activity> _Activity;
+		
+		private EntityRef<Lookup> _Lookup;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnActivityIDChanging(System.Nullable<int> value);
+    partial void OnActivityIDChanged();
+    partial void OnReceipientChanging(string value);
+    partial void OnReceipientChanged();
+    partial void OnNotificationTypeChanging(System.Nullable<int> value);
+    partial void OnNotificationTypeChanged();
+    partial void OnAdditionalMessageChanging(string value);
+    partial void OnAdditionalMessageChanged();
+    partial void OnIsPublicChanging(System.Nullable<bool> value);
+    partial void OnIsPublicChanged();
+    #endregion
+		
+		public Notification()
+		{
+			this._Activity = default(EntityRef<Activity>);
+			this._Lookup = default(EntityRef<Lookup>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityID", DbType="Int")]
+		public System.Nullable<int> ActivityID
+		{
+			get
+			{
+				return this._ActivityID;
+			}
+			set
+			{
+				if ((this._ActivityID != value))
+				{
+					if (this._Activity.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnActivityIDChanging(value);
+					this.SendPropertyChanging();
+					this._ActivityID = value;
+					this.SendPropertyChanged("ActivityID");
+					this.OnActivityIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Receipient", DbType="VarChar(150)")]
+		public string Receipient
+		{
+			get
+			{
+				return this._Receipient;
+			}
+			set
+			{
+				if ((this._Receipient != value))
+				{
+					this.OnReceipientChanging(value);
+					this.SendPropertyChanging();
+					this._Receipient = value;
+					this.SendPropertyChanged("Receipient");
+					this.OnReceipientChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NotificationType", DbType="Int")]
+		public System.Nullable<int> NotificationType
+		{
+			get
+			{
+				return this._NotificationType;
+			}
+			set
+			{
+				if ((this._NotificationType != value))
+				{
+					if (this._Lookup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnNotificationTypeChanging(value);
+					this.SendPropertyChanging();
+					this._NotificationType = value;
+					this.SendPropertyChanged("NotificationType");
+					this.OnNotificationTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdditionalMessage", DbType="VarChar(250)")]
+		public string AdditionalMessage
+		{
+			get
+			{
+				return this._AdditionalMessage;
+			}
+			set
+			{
+				if ((this._AdditionalMessage != value))
+				{
+					this.OnAdditionalMessageChanging(value);
+					this.SendPropertyChanging();
+					this._AdditionalMessage = value;
+					this.SendPropertyChanged("AdditionalMessage");
+					this.OnAdditionalMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPublic", DbType="Bit")]
+		public System.Nullable<bool> IsPublic
+		{
+			get
+			{
+				return this._IsPublic;
+			}
+			set
+			{
+				if ((this._IsPublic != value))
+				{
+					this.OnIsPublicChanging(value);
+					this.SendPropertyChanging();
+					this._IsPublic = value;
+					this.SendPropertyChanged("IsPublic");
+					this.OnIsPublicChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Activity_Notification", Storage="_Activity", ThisKey="ActivityID", OtherKey="ID", IsForeignKey=true)]
+		public Activity Activity
+		{
+			get
+			{
+				return this._Activity.Entity;
+			}
+			set
+			{
+				Activity previousValue = this._Activity.Entity;
+				if (((previousValue != value) 
+							|| (this._Activity.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Activity.Entity = null;
+						previousValue.Notifications.Remove(this);
+					}
+					this._Activity.Entity = value;
+					if ((value != null))
+					{
+						value.Notifications.Add(this);
+						this._ActivityID = value.ID;
+					}
+					else
+					{
+						this._ActivityID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Activity");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Notification", Storage="_Lookup", ThisKey="NotificationType", OtherKey="ID", IsForeignKey=true)]
+		public Lookup Lookup
+		{
+			get
+			{
+				return this._Lookup.Entity;
+			}
+			set
+			{
+				Lookup previousValue = this._Lookup.Entity;
+				if (((previousValue != value) 
+							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lookup.Entity = null;
+						previousValue.Notifications.Remove(this);
+					}
+					this._Lookup.Entity = value;
+					if ((value != null))
+					{
+						value.Notifications.Add(this);
+						this._NotificationType = value.ID;
+					}
+					else
+					{
+						this._NotificationType = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Lookup");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Students")]
+	public partial class Student : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private string _Email;
+		
+		private string _Phone;
+		
+		private System.Nullable<System.DateTime> _DateOfBirth;
+		
+		private System.Nullable<int> _SchoolID;
+		
+		private string _ThumbnailUrl;
+		
+		private EntitySet<Activity> _Activities;
+		
+		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
+		
+		private EntitySet<GradeStudent> _GradeStudents;
+		
+		private EntitySet<Medical> _Medicals;
+		
+		private EntityRef<School> _School;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnDateOfBirthChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateOfBirthChanged();
+    partial void OnSchoolIDChanging(System.Nullable<int> value);
+    partial void OnSchoolIDChanged();
+    partial void OnThumbnailUrlChanging(string value);
+    partial void OnThumbnailUrlChanged();
+    #endregion
+		
+		public Student()
+		{
+			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
+			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
+			this._GradeStudents = new EntitySet<GradeStudent>(new Action<GradeStudent>(this.attach_GradeStudents), new Action<GradeStudent>(this.detach_GradeStudents));
+			this._Medicals = new EntitySet<Medical>(new Action<Medical>(this.attach_Medicals), new Action<Medical>(this.detach_Medicals));
+			this._School = default(EntityRef<School>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(250)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfBirth", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateOfBirth
+		{
+			get
+			{
+				return this._DateOfBirth;
+			}
+			set
+			{
+				if ((this._DateOfBirth != value))
+				{
+					this.OnDateOfBirthChanging(value);
+					this.SendPropertyChanging();
+					this._DateOfBirth = value;
+					this.SendPropertyChanged("DateOfBirth");
+					this.OnDateOfBirthChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SchoolID", DbType="Int")]
+		public System.Nullable<int> SchoolID
+		{
+			get
+			{
+				return this._SchoolID;
+			}
+			set
+			{
+				if ((this._SchoolID != value))
+				{
+					if (this._School.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSchoolIDChanging(value);
+					this.SendPropertyChanging();
+					this._SchoolID = value;
+					this.SendPropertyChanged("SchoolID");
+					this.OnSchoolIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThumbnailUrl", DbType="VarChar(500)")]
+		public string ThumbnailUrl
+		{
+			get
+			{
+				return this._ThumbnailUrl;
+			}
+			set
+			{
+				if ((this._ThumbnailUrl != value))
+				{
+					this.OnThumbnailUrlChanging(value);
+					this.SendPropertyChanging();
+					this._ThumbnailUrl = value;
+					this.SendPropertyChanged("ThumbnailUrl");
+					this.OnThumbnailUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Activity", Storage="_Activities", ThisKey="ID", OtherKey="StudentID")]
+		public EntitySet<Activity> Activities
+		{
+			get
+			{
+				return this._Activities;
+			}
+			set
+			{
+				this._Activities.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="StudentID")]
+		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
+		{
+			get
+			{
+				return this._FamilyMemberStudents;
+			}
+			set
+			{
+				this._FamilyMemberStudents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_GradeStudent", Storage="_GradeStudents", ThisKey="ID", OtherKey="StudentID")]
+		public EntitySet<GradeStudent> GradeStudents
+		{
+			get
+			{
+				return this._GradeStudents;
+			}
+			set
+			{
+				this._GradeStudents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Medical", Storage="_Medicals", ThisKey="ID", OtherKey="StudentID")]
+		public EntitySet<Medical> Medicals
+		{
+			get
+			{
+				return this._Medicals;
+			}
+			set
+			{
+				this._Medicals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Student", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		public School School
+		{
+			get
+			{
+				return this._School.Entity;
+			}
+			set
+			{
+				School previousValue = this._School.Entity;
+				if (((previousValue != value) 
+							|| (this._School.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._School.Entity = null;
+						previousValue.Students.Remove(this);
+					}
+					this._School.Entity = value;
+					if ((value != null))
+					{
+						value.Students.Add(this);
+						this._SchoolID = value.ID;
+					}
+					else
+					{
+						this._SchoolID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("School");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
+		private void attach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
+		private void attach_GradeStudents(GradeStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_GradeStudents(GradeStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
+		private void attach_Medicals(Medical entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_Medicals(Medical entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Teachers")]
+	public partial class Teacher : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _FirstName;
+		
+		private string _LastName;
+		
+		private string _Address;
+		
+		private string _Email;
+		
+		private string _ContactPhone;
+		
+		private string _MobilePhone;
+		
+		private System.Nullable<int> _SchoolID;
+		
+		private System.Nullable<bool> _IsAdmin;
+		
+		private EntitySet<Grade> _Grades;
+		
+		private EntityRef<School> _School;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnFirstNameChanging(string value);
+    partial void OnFirstNameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnContactPhoneChanging(string value);
+    partial void OnContactPhoneChanged();
+    partial void OnMobilePhoneChanging(string value);
+    partial void OnMobilePhoneChanged();
+    partial void OnSchoolIDChanging(System.Nullable<int> value);
+    partial void OnSchoolIDChanged();
+    partial void OnIsAdminChanging(System.Nullable<bool> value);
+    partial void OnIsAdminChanged();
+    #endregion
+		
+		public Teacher()
+		{
+			this._Grades = new EntitySet<Grade>(new Action<Grade>(this.attach_Grades), new Action<Grade>(this.detach_Grades));
+			this._School = default(EntityRef<School>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50)")]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this.OnFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._FirstName = value;
+					this.SendPropertyChanged("FirstName");
+					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50)")]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this.OnLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(250)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(250)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactPhone", DbType="VarChar(15)")]
+		public string ContactPhone
+		{
+			get
+			{
+				return this._ContactPhone;
+			}
+			set
+			{
+				if ((this._ContactPhone != value))
+				{
+					this.OnContactPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._ContactPhone = value;
+					this.SendPropertyChanged("ContactPhone");
+					this.OnContactPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MobilePhone", DbType="VarChar(15) NOT NULL", CanBeNull=false)]
+		public string MobilePhone
+		{
+			get
+			{
+				return this._MobilePhone;
+			}
+			set
+			{
+				if ((this._MobilePhone != value))
+				{
+					this.OnMobilePhoneChanging(value);
+					this.SendPropertyChanging();
+					this._MobilePhone = value;
+					this.SendPropertyChanged("MobilePhone");
+					this.OnMobilePhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SchoolID", DbType="Int")]
+		public System.Nullable<int> SchoolID
+		{
+			get
+			{
+				return this._SchoolID;
+			}
+			set
+			{
+				if ((this._SchoolID != value))
+				{
+					if (this._School.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSchoolIDChanging(value);
+					this.SendPropertyChanging();
+					this._SchoolID = value;
+					this.SendPropertyChanged("SchoolID");
+					this.OnSchoolIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAdmin", DbType="Bit")]
+		public System.Nullable<bool> IsAdmin
+		{
+			get
+			{
+				return this._IsAdmin;
+			}
+			set
+			{
+				if ((this._IsAdmin != value))
+				{
+					this.OnIsAdminChanging(value);
+					this.SendPropertyChanging();
+					this._IsAdmin = value;
+					this.SendPropertyChanged("IsAdmin");
+					this.OnIsAdminChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Teacher_Grade", Storage="_Grades", ThisKey="ID", OtherKey="TeacherID")]
+		public EntitySet<Grade> Grades
+		{
+			get
+			{
+				return this._Grades;
+			}
+			set
+			{
+				this._Grades.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Teacher", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		public School School
+		{
+			get
+			{
+				return this._School.Entity;
+			}
+			set
+			{
+				School previousValue = this._School.Entity;
+				if (((previousValue != value) 
+							|| (this._School.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._School.Entity = null;
+						previousValue.Teachers.Remove(this);
+					}
+					this._School.Entity = value;
+					if ((value != null))
+					{
+						value.Teachers.Add(this);
+						this._SchoolID = value.ID;
+					}
+					else
+					{
+						this._SchoolID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("School");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.Teacher = this;
+		}
+		
+		private void detach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.Teacher = null;
 		}
 	}
 }

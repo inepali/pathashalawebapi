@@ -3,3 +3,6 @@
 ################################################################################
 
 /obj/Debug
+/.vs/PathshalaWebApi/v15/Server/sqlite3
+/packages
+/.vs/PathshalaWebApi/v15
