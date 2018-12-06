@@ -47,8 +47,9 @@ namespace Controllers.Api
         }
 
         // POST: api/School
-        public void Post([FromBody]string value)
+        public void Post(School school)
         {
+            // do something here;
         }
 
         // PUT: api/School/5
