@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="pathshala" Class="PathshalaModelsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=pathshala.database.windows.net;Initial Catalog=pathshala;User ID=pathshala;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="pathshalaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Schools" Member="Schools">
+    <Type Name="School">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="About" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Fax" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="FacebookUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="YouTubeUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="TwiterUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
