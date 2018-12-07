@@ -12,7 +12,7 @@ namespace Controllers
         {
             ViewBag.Title = "Home Page";
 
-            //this is a comment
+            //this is a comment - test 2
 
             return View();
         }
