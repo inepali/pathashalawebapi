@@ -212,6 +212,7 @@
       <LastGenOutput>PathshalaModels.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include=".gitignore" />
     <None Include="Models\PathshalaModels.dbml.layout">
       <DependentUpon>PathshalaModels.dbml</DependentUpon>
     </None>

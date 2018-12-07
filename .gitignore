@@ -2,8 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/obj/Debug
-/.vs/PathshalaWebApi/v15/Server/sqlite3
 /packages
-/.vs/PathshalaWebApi/v15
+/.vs
 /bin
+/obj
+
