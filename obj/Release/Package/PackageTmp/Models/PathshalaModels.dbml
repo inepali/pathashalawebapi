@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="pathshala" Class="PathshalaModelsDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=pathshala.database.windows.net;Initial Catalog=pathshala;User ID=pathshala;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="pathshalaConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Schools" Member="Schools">
+    <Type Name="School">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="About" Type="System.Data.Linq.Binary" DbType="VarBinary(MAX)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="Fax" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="FacebookUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="YouTubeUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="TwiterUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="School_CICO" Member="CICOs" ThisKey="ID" OtherKey="StudentID" Type="CICO" />
+      <Association Name="School_Grade" Member="Grades" ThisKey="ID" OtherKey="SchoolID" Type="Grade" />
+      <Association Name="School_Student" Member="Students" ThisKey="ID" OtherKey="SchoolID" Type="Student" />
+      <Association Name="School_Teacher" Member="Teachers" ThisKey="ID" OtherKey="SchoolID" Type="Teacher" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Activities" Member="Activities">
+    <Type Name="Activity">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ActivityType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notified" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Message" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="ActivityOn" Type="System.Data.Linq.Binary" DbType="rowversion" CanBeNull="true" IsVersion="true" />
+      <Association Name="Activity_Notification" Member="Notifications" ThisKey="ID" OtherKey="ActivityID" Type="Notification" />
+      <Association Name="Lookup_Activity" Member="Lookup" ThisKey="ActivityType" OtherKey="ID" Type="Lookup" IsForeignKey="true" />
+      <Association Name="Student_Activity" Member="Student" ThisKey="StudentID" OtherKey="ID" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AppUsers" Member="AppUsers">
+    <Type Name="AppUser">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="IsFacbookLogin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsGoogleLogin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(250) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsVerified" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CICOs" Member="CICOs">
+    <Type Name="CICO">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedIn" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="CheckedInBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CheckedOut" Type="System.DateTime" DbType="DateTime2" CanBeNull="true" />
+      <Column Name="CheckedOutBy" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="School_CICO" Member="School" ThisKey="StudentID" OtherKey="ID" Type="School" IsForeignKey="true" />
+      <Association Name="FamilyMemberStudent_CICO" Member="FamilyMemberStudent" ThisKey="CheckedInBy" OtherKey="ID" Type="FamilyMemberStudent" IsForeignKey="true" />
+      <Association Name="FamilyMemberStudent_CICO1" Member="FamilyMemberStudent1" ThisKey="CheckedOutBy" OtherKey="ID" Type="FamilyMemberStudent" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FamilyMembers" Member="FamilyMembers">
+    <Type Name="FamilyMember">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="TextToMobile" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CICOCode" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmergencyContact" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="EmergencyContactPerson" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Association Name="FamilyMember_FamilyMemberStudent" Member="FamilyMemberStudents" ThisKey="ID" OtherKey="FamilyMemberID" Type="FamilyMemberStudent" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FamilyMemberStudents" Member="FamilyMemberStudents">
+    <Type Name="FamilyMemberStudent">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FamilyMemberID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RelationshipTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="FamilyMemberStudent_CICO" Member="CICOs" ThisKey="ID" OtherKey="CheckedInBy" Type="CICO" />
+      <Association Name="FamilyMemberStudent_CICO1" Member="CICOs1" ThisKey="ID" OtherKey="CheckedOutBy" Type="CICO" />
+      <Association Name="FamilyMember_FamilyMemberStudent" Member="FamilyMember" ThisKey="FamilyMemberID" OtherKey="ID" Type="FamilyMember" IsForeignKey="true" />
+      <Association Name="Lookup_FamilyMemberStudent" Member="Lookup" ThisKey="RelationshipTypeID" OtherKey="ID" Type="Lookup" IsForeignKey="true" />
+      <Association Name="Student_FamilyMemberStudent" Member="Student" ThisKey="StudentID" OtherKey="ID" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Grades" Member="Grades">
+    <Type Name="Grade">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GradeLookupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TeacherID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SchoolID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Grade_GradeStudent" Member="GradeStudents" ThisKey="ID" OtherKey="GradeID" Type="GradeStudent" />
+      <Association Name="School_Grade" Member="School" ThisKey="SchoolID" OtherKey="ID" Type="School" IsForeignKey="true" />
+      <Association Name="Lookup_Grade" Member="Lookup" ThisKey="GradeLookupID" OtherKey="ID" Type="Lookup" IsForeignKey="true" />
+      <Association Name="Teacher_Grade" Member="Teacher" ThisKey="TeacherID" OtherKey="ID" Type="Teacher" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GradeStudents" Member="GradeStudents">
+    <Type Name="GradeStudent">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="GradeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Grade_GradeStudent" Member="Grade" ThisKey="GradeID" OtherKey="ID" Type="Grade" IsForeignKey="true" />
+      <Association Name="Student_GradeStudent" Member="Student" ThisKey="StudentID" OtherKey="ID" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Lookups" Member="Lookups">
+    <Type Name="Lookup">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LookupKey" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LookupValue" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="Lookup_Activity" Member="Activities" ThisKey="ID" OtherKey="ActivityType" Type="Activity" />
+      <Association Name="Lookup_FamilyMemberStudent" Member="FamilyMemberStudents" ThisKey="ID" OtherKey="RelationshipTypeID" Type="FamilyMemberStudent" />
+      <Association Name="Lookup_Grade" Member="Grades" ThisKey="ID" OtherKey="GradeLookupID" Type="Grade" />
+      <Association Name="Lookup_Notification" Member="Notifications" ThisKey="ID" OtherKey="NotificationType" Type="Notification" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Medicals" Member="Medicals">
+    <Type Name="Medical">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudentID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Hospital" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="MedicalDoctor" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MedicalPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MedicalAddress" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="Student_Medical" Member="Student" ThisKey="StudentID" OtherKey="ID" Type="Student" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Notifications" Member="Notifications">
+    <Type Name="Notification">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ActivityID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Receipient" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
+      <Column Name="NotificationType" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AdditionalMessage" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="IsPublic" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Activity_Notification" Member="Activity" ThisKey="ActivityID" OtherKey="ID" Type="Activity" IsForeignKey="true" />
+      <Association Name="Lookup_Notification" Member="Lookup" ThisKey="NotificationType" OtherKey="ID" Type="Lookup" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Students" Member="Students">
+    <Type Name="Student">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SchoolID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ThumbnailUrl" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Association Name="Student_Activity" Member="Activities" ThisKey="ID" OtherKey="StudentID" Type="Activity" />
+      <Association Name="Student_FamilyMemberStudent" Member="FamilyMemberStudents" ThisKey="ID" OtherKey="StudentID" Type="FamilyMemberStudent" />
+      <Association Name="Student_GradeStudent" Member="GradeStudents" ThisKey="ID" OtherKey="StudentID" Type="GradeStudent" />
+      <Association Name="Student_Medical" Member="Medicals" ThisKey="ID" OtherKey="StudentID" Type="Medical" />
+      <Association Name="School_Student" Member="School" ThisKey="SchoolID" OtherKey="ID" Type="School" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Teachers" Member="Teachers">
+    <Type Name="Teacher">
+      <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(250)" CanBeNull="true" />
+      <Column Name="ContactPhone" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MobilePhone" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="SchoolID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsAdmin" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="Teacher_Grade" Member="Grades" ThisKey="ID" OtherKey="TeacherID" Type="Grade" />
+      <Association Name="School_Teacher" Member="School" ThisKey="SchoolID" OtherKey="ID" Type="School" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

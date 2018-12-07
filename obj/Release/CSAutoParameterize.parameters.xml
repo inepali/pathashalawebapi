@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="pathshalaConnectionString-Web.config Connection String" description="pathshalaConnectionString Connection String used in web.config by the application to access the database." defaultValue="Data Source=pathshala.database.windows.net;Initial Catalog=pathshala;User ID=pathshala;Password=path2018$;Connect Timeout=60;Encrypt=True;TrustServerCertificate=False" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\DEV\\git\\pathshalawebapi\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='pathshalaConnectionString']/@connectionString" />
+  </parameter>
+</parameters>

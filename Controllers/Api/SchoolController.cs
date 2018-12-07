@@ -19,7 +19,6 @@ namespace Controllers.Api
         /// Operataion:GET,
         /// Resource Locator : api/School
         /// </summary>
-        
         public IEnumerable<School> Get()
         {
             var schools = from s in DB.Schools
@@ -28,7 +27,6 @@ namespace Controllers.Api
             return schools;
         }
 
-        // GET: api/School/5
 
         /// <summary>
         /// Looks up all school data.
@@ -36,7 +34,6 @@ namespace Controllers.Api
         /// Resource Locator : api/School/{id}
         /// </summary>
         /// <param name="id">The ID of the data.</param>
-
         public School GetById(int id)
         {
             var school = (from s in DB.Schools
