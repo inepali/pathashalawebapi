@@ -44,14 +44,19 @@ namespace Controllers.Api
         }
 
         // POST: api/School
-        public void Post(School school)
+        public void Post(School school) // ZYZ
         {
-            // do something here;
+     
+            
         }
 
         // PUT: api/School/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(School school)
         {
+
+
+            DB.Schools.InsertOnSubmit(school);
+            DB.SubmitChanges();
         }
 
         // DELETE: api/School/5

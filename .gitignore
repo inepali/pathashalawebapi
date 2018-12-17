@@ -6,4 +6,6 @@
 /.vs
 /bin
 /obj
+/obj/Release
+/obj/Debug
 
