@@ -8,60 +8,58 @@ using System.Web.Http;
 
 namespace Controllers.Api
 {
-    /// <summary>
-    /// This represents API of School entity.
-    /// </summary>
-    public class SchoolController : BaseApiController
-    {
+	/// <summary>
+	/// This represents API of School entity.
+	/// </summary>
+	public class SchoolController : BaseApiController
+	{
 
-        /// <summary>
-        /// Looks up all school data.
-        /// Operataion:GET,
-        /// Resource Locator : api/School
-        /// </summary>
-        public IEnumerable<School> Get()
-        {
-            var schools = from s in DB.Schools
-                          select s;
+		/// <summary>
+		/// Looks up all school data.
+		/// Operataion:GET,
+		/// Resource Locator : api/School
+		/// </summary>
 
-            return schools;
-        }
+		public IEnumerable<School> Get()
+		{
+			var schools = from s in DB.Schools
+						  select s;
 
+			return schools;
+		}
 
-        /// <summary>
-        /// Looks up all school data.
-        /// Operataion:GET,
-        /// Resource Locator : api/School/{id}
-        /// </summary>
-        /// <param name="id">The ID of the data.</param>
-        public School GetById(int id)
-        {
-            var school = (from s in DB.Schools
-                          where s.ID == id
-                          select s).FirstOrDefault();
+		// GET: api/School/5
 
-            return school;
-        }
+		/// <summary>
+		/// Looks up all school data.
+		/// Operataion:GET,
+		/// Resource Locator : api/School/{id}
+		/// </summary>
+		/// <param name="id">The ID of the data.</param>
 
-        // POST: api/School
-        public void Post(School school) // ZYZ
-        {
-     
-            
-        }
+		public School GetById(int id)
+		{
+			var school = (from s in DB.Schools
+						  where s.ID == id
+						  select s).FirstOrDefault();
 
-        // PUT: api/School/5
-        public void Put(School school)
-        {
+			return school;
+		}
 
+		// POST: api/School
+		public void Post(School school)
+		{
+			// do something here;
+		}
 
-            DB.Schools.InsertOnSubmit(school);
-            DB.SubmitChanges();
-        }
+		// PUT: api/School/5
+		public void Put(int id, [FromBody]string value)
+		{
+		}
 
-        // DELETE: api/School/5
-        public void Delete(int id)
-        {
-        }
-    }
+		// DELETE: api/School/5
+		public void Delete(int id)
+		{
+		}
+	}
 }
