@@ -30,7 +30,17 @@ namespace com.pathshala.Controllers.Api
             return person;
         }
 
-        
+        // GET: api/Person/GetPersonAndStudet
+        public Person GetPersonAndStudet(int id)
+        {
+            Person person = (from p in DB.Persons
+                             where p.ID == id
+                             select p).SingleOrDefault();
+
+            return person;
+        }
+
+
 
         // POST: api/Person
         [HttpPost]

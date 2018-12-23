@@ -1,0 +1,68 @@
+﻿@model IEnumerable<com.pathshala.Models.Teacher>
+
+@{
+    ViewBag.Title = "Teachers";
+}
+
+
+<div class="row">
+    <div class="col-sm">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div class="col-sm text-right">
+        @*@Html.ActionLink("+ Create New", "Create")*@
+
+        @Html.ActionLink(" Create New", "Create", null, new { @class = "btn btn-primary" })
+        @*<a class="btn btn-primary" href="/Teacher/Create" role="button"><span class="glyphicons glyphicon-plus"></span> Create New</a>*@
+    </div>
+</div>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            First Name
+        </th>
+
+        <th>
+            Last Name
+        </th>
+        <th>
+            School
+        </th>
+        <th>
+            Admin
+        </th>
+        <th width="15%"></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Person.LastName)
+            </td>
+            <td>
+                @*@Html.DisplayFor(modelItem => item.School.Name)*@
+                @Html.ActionLink(item.School.Name, "../School/Details/", new { id = item.School.ID })
+            </td>
+            <td>
+                @(item.IsAdmin.GetValueOrDefault() ? "Yes" : "No")
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+                @*@Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })*@
+            </td>
+        </tr>
+    }
+
+</table>
