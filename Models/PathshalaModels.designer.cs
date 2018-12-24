@@ -39,9 +39,6 @@ namespace com.pathshala.Models
     partial void InsertCICO(CICO instance);
     partial void UpdateCICO(CICO instance);
     partial void DeleteCICO(CICO instance);
-    partial void InsertFamilyMemberStudent(FamilyMemberStudent instance);
-    partial void UpdateFamilyMemberStudent(FamilyMemberStudent instance);
-    partial void DeleteFamilyMemberStudent(FamilyMemberStudent instance);
     partial void InsertMedical(Medical instance);
     partial void UpdateMedical(Medical instance);
     partial void DeleteMedical(Medical instance);
@@ -66,6 +63,9 @@ namespace com.pathshala.Models
     partial void InsertStudent(Student instance);
     partial void UpdateStudent(Student instance);
     partial void DeleteStudent(Student instance);
+    partial void InsertFamilyMemberStudent(FamilyMemberStudent instance);
+    partial void UpdateFamilyMemberStudent(FamilyMemberStudent instance);
+    partial void DeleteFamilyMemberStudent(FamilyMemberStudent instance);
     #endregion
 		
 		public PathshalaModelsDataContext() : 
@@ -119,14 +119,6 @@ namespace com.pathshala.Models
 			get
 			{
 				return this.GetTable<CICO>();
-			}
-		}
-		
-		public System.Data.Linq.Table<FamilyMemberStudent> FamilyMemberStudents
-		{
-			get
-			{
-				return this.GetTable<FamilyMemberStudent>();
 			}
 		}
 		
@@ -191,6 +183,14 @@ namespace com.pathshala.Models
 			get
 			{
 				return this.GetTable<Student>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FamilyMemberStudent> FamilyMemberStudents
+		{
+			get
+			{
+				return this.GetTable<FamilyMemberStudent>();
 			}
 		}
 	}
@@ -897,9 +897,9 @@ namespace com.pathshala.Models
 		
 		private EntityRef<School> _School;
 		
-		private EntityRef<FamilyMemberStudent> _FamilyMemberStudent;
+		private EntityRef<FamilyMemberStudent> _FamilyMemberStudent11;
 		
-		private EntityRef<FamilyMemberStudent> _FamilyMemberStudent1;
+		private EntityRef<FamilyMemberStudent> _FamilyMemberStudent12;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -922,8 +922,8 @@ namespace com.pathshala.Models
 		public CICO()
 		{
 			this._School = default(EntityRef<School>);
-			this._FamilyMemberStudent = default(EntityRef<FamilyMemberStudent>);
-			this._FamilyMemberStudent1 = default(EntityRef<FamilyMemberStudent>);
+			this._FamilyMemberStudent11 = default(EntityRef<FamilyMemberStudent>);
+			this._FamilyMemberStudent12 = default(EntityRef<FamilyMemberStudent>);
 			OnCreated();
 		}
 		
@@ -1002,7 +1002,7 @@ namespace com.pathshala.Models
 			{
 				if ((this._CheckedInBy != value))
 				{
-					if (this._FamilyMemberStudent.HasLoadedOrAssignedValue)
+					if (this._FamilyMemberStudent11.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1046,7 +1046,7 @@ namespace com.pathshala.Models
 			{
 				if ((this._CheckedOutBy != value))
 				{
-					if (this._FamilyMemberStudent1.HasLoadedOrAssignedValue)
+					if (this._FamilyMemberStudent12.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -1093,26 +1093,26 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO", Storage="_FamilyMemberStudent", ThisKey="CheckedInBy", OtherKey="ID", IsForeignKey=true)]
-		public FamilyMemberStudent FamilyMemberStudent
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO", Storage="_FamilyMemberStudent11", ThisKey="CheckedInBy", OtherKey="ID", IsForeignKey=true)]
+		public FamilyMemberStudent FamilyMemberStudent11
 		{
 			get
 			{
-				return this._FamilyMemberStudent.Entity;
+				return this._FamilyMemberStudent11.Entity;
 			}
 			set
 			{
-				FamilyMemberStudent previousValue = this._FamilyMemberStudent.Entity;
+				FamilyMemberStudent previousValue = this._FamilyMemberStudent11.Entity;
 				if (((previousValue != value) 
-							|| (this._FamilyMemberStudent.HasLoadedOrAssignedValue == false)))
+							|| (this._FamilyMemberStudent11.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._FamilyMemberStudent.Entity = null;
+						this._FamilyMemberStudent11.Entity = null;
 						previousValue.CICOs.Remove(this);
 					}
-					this._FamilyMemberStudent.Entity = value;
+					this._FamilyMemberStudent11.Entity = value;
 					if ((value != null))
 					{
 						value.CICOs.Add(this);
@@ -1122,31 +1122,31 @@ namespace com.pathshala.Models
 					{
 						this._CheckedInBy = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("FamilyMemberStudent");
+					this.SendPropertyChanged("FamilyMemberStudent11");
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO1", Storage="_FamilyMemberStudent1", ThisKey="CheckedOutBy", OtherKey="ID", IsForeignKey=true)]
-		public FamilyMemberStudent FamilyMemberStudent1
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO1", Storage="_FamilyMemberStudent12", ThisKey="CheckedOutBy", OtherKey="ID", IsForeignKey=true)]
+		public FamilyMemberStudent FamilyMemberStudent12
 		{
 			get
 			{
-				return this._FamilyMemberStudent1.Entity;
+				return this._FamilyMemberStudent12.Entity;
 			}
 			set
 			{
-				FamilyMemberStudent previousValue = this._FamilyMemberStudent1.Entity;
+				FamilyMemberStudent previousValue = this._FamilyMemberStudent12.Entity;
 				if (((previousValue != value) 
-							|| (this._FamilyMemberStudent1.HasLoadedOrAssignedValue == false)))
+							|| (this._FamilyMemberStudent12.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._FamilyMemberStudent1.Entity = null;
+						this._FamilyMemberStudent12.Entity = null;
 						previousValue.CICOs1.Remove(this);
 					}
-					this._FamilyMemberStudent1.Entity = value;
+					this._FamilyMemberStudent12.Entity = value;
 					if ((value != null))
 					{
 						value.CICOs1.Add(this);
@@ -1156,7 +1156,7 @@ namespace com.pathshala.Models
 					{
 						this._CheckedOutBy = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("FamilyMemberStudent1");
+					this.SendPropertyChanged("FamilyMemberStudent12");
 				}
 			}
 		}
@@ -1179,278 +1179,6 @@ namespace com.pathshala.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FamilyMemberStudents")]
-	public partial class FamilyMemberStudent : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private System.Nullable<int> _StudentID;
-		
-		private System.Nullable<int> _FamilyMemberID;
-		
-		private System.Nullable<int> _RelationshipTypeID;
-		
-		private EntitySet<CICO> _CICOs;
-		
-		private EntitySet<CICO> _CICOs1;
-		
-		private EntityRef<FamilyMember> _FamilyMember;
-		
-		private EntityRef<Student> _Student;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnStudentIDChanging(System.Nullable<int> value);
-    partial void OnStudentIDChanged();
-    partial void OnFamilyMemberIDChanging(System.Nullable<int> value);
-    partial void OnFamilyMemberIDChanged();
-    partial void OnRelationshipTypeIDChanging(System.Nullable<int> value);
-    partial void OnRelationshipTypeIDChanged();
-    #endregion
-		
-		public FamilyMemberStudent()
-		{
-			this._CICOs = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs), new Action<CICO>(this.detach_CICOs));
-			this._CICOs1 = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs1), new Action<CICO>(this.detach_CICOs1));
-			this._FamilyMember = default(EntityRef<FamilyMember>);
-			this._Student = default(EntityRef<Student>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
-		public System.Nullable<int> StudentID
-		{
-			get
-			{
-				return this._StudentID;
-			}
-			set
-			{
-				if ((this._StudentID != value))
-				{
-					if (this._Student.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStudentIDChanging(value);
-					this.SendPropertyChanging();
-					this._StudentID = value;
-					this.SendPropertyChanged("StudentID");
-					this.OnStudentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FamilyMemberID", DbType="Int")]
-		public System.Nullable<int> FamilyMemberID
-		{
-			get
-			{
-				return this._FamilyMemberID;
-			}
-			set
-			{
-				if ((this._FamilyMemberID != value))
-				{
-					if (this._FamilyMember.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnFamilyMemberIDChanging(value);
-					this.SendPropertyChanging();
-					this._FamilyMemberID = value;
-					this.SendPropertyChanged("FamilyMemberID");
-					this.OnFamilyMemberIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelationshipTypeID", DbType="Int")]
-		public System.Nullable<int> RelationshipTypeID
-		{
-			get
-			{
-				return this._RelationshipTypeID;
-			}
-			set
-			{
-				if ((this._RelationshipTypeID != value))
-				{
-					this.OnRelationshipTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._RelationshipTypeID = value;
-					this.SendPropertyChanged("RelationshipTypeID");
-					this.OnRelationshipTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="CheckedInBy")]
-		public EntitySet<CICO> CICOs
-		{
-			get
-			{
-				return this._CICOs;
-			}
-			set
-			{
-				this._CICOs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO1", Storage="_CICOs1", ThisKey="ID", OtherKey="CheckedOutBy")]
-		public EntitySet<CICO> CICOs1
-		{
-			get
-			{
-				return this._CICOs1;
-			}
-			set
-			{
-				this._CICOs1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent", Storage="_FamilyMember", ThisKey="FamilyMemberID", OtherKey="ID", IsForeignKey=true)]
-		public FamilyMember FamilyMember
-		{
-			get
-			{
-				return this._FamilyMember.Entity;
-			}
-			set
-			{
-				FamilyMember previousValue = this._FamilyMember.Entity;
-				if (((previousValue != value) 
-							|| (this._FamilyMember.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._FamilyMember.Entity = null;
-						previousValue.FamilyMemberStudents.Remove(this);
-					}
-					this._FamilyMember.Entity = value;
-					if ((value != null))
-					{
-						value.FamilyMemberStudents.Add(this);
-						this._FamilyMemberID = value.ID;
-					}
-					else
-					{
-						this._FamilyMemberID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("FamilyMember");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
-		public Student Student
-		{
-			get
-			{
-				return this._Student.Entity;
-			}
-			set
-			{
-				Student previousValue = this._Student.Entity;
-				if (((previousValue != value) 
-							|| (this._Student.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Student.Entity = null;
-						previousValue.FamilyMemberStudents.Remove(this);
-					}
-					this._Student.Entity = value;
-					if ((value != null))
-					{
-						value.FamilyMemberStudents.Add(this);
-						this._StudentID = value.ID;
-					}
-					else
-					{
-						this._StudentID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Student");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_CICOs(CICO entity)
-		{
-			this.SendPropertyChanging();
-			entity.FamilyMemberStudent = this;
-		}
-		
-		private void detach_CICOs(CICO entity)
-		{
-			this.SendPropertyChanging();
-			entity.FamilyMemberStudent = null;
-		}
-		
-		private void attach_CICOs1(CICO entity)
-		{
-			this.SendPropertyChanging();
-			entity.FamilyMemberStudent1 = this;
-		}
-		
-		private void detach_CICOs1(CICO entity)
-		{
-			this.SendPropertyChanging();
-			entity.FamilyMemberStudent1 = null;
 		}
 	}
 	
@@ -2474,7 +2202,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="FamilyMemberID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent1", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="FamilyMemberID")]
 		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
 		{
 			get
@@ -2816,6 +2544,8 @@ namespace com.pathshala.Models
 		
 		private EntitySet<Grade> _Grades;
 		
+		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -2833,6 +2563,7 @@ namespace com.pathshala.Models
 			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
 			this._Notifications = new EntitySet<Notification>(new Action<Notification>(this.attach_Notifications), new Action<Notification>(this.detach_Notifications));
 			this._Grades = new EntitySet<Grade>(new Action<Grade>(this.attach_Grades), new Action<Grade>(this.detach_Grades));
+			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
 			OnCreated();
 		}
 		
@@ -2935,6 +2666,19 @@ namespace com.pathshala.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_FamilyMemberStudent1", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="RelationshipType")]
+		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
+		{
+			get
+			{
+				return this._FamilyMemberStudents;
+			}
+			set
+			{
+				this._FamilyMemberStudents.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -2986,6 +2730,18 @@ namespace com.pathshala.Models
 		}
 		
 		private void detach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
+		}
+		
+		private void attach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_FamilyMemberStudents(FamilyMemberStudent entity)
 		{
 			this.SendPropertyChanging();
 			entity.Lookup = null;
@@ -3295,9 +3051,9 @@ namespace com.pathshala.Models
 		
 		private EntitySet<Activity> _Activities;
 		
-		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
-		
 		private EntitySet<Medical> _Medicals;
+		
+		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
 		
 		private EntityRef<Grade> _Grade;
 		
@@ -3324,8 +3080,8 @@ namespace com.pathshala.Models
 		public Student()
 		{
 			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
-			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
 			this._Medicals = new EntitySet<Medical>(new Action<Medical>(this.attach_Medicals), new Action<Medical>(this.detach_Medicals));
+			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
 			this._Grade = default(EntityRef<Grade>);
 			this._Person = default(EntityRef<Person>);
 			this._School = default(EntityRef<School>);
@@ -3457,19 +3213,6 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="StudentID")]
-		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
-		{
-			get
-			{
-				return this._FamilyMemberStudents;
-			}
-			set
-			{
-				this._FamilyMemberStudents.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Medical", Storage="_Medicals", ThisKey="ID", OtherKey="StudentID")]
 		public EntitySet<Medical> Medicals
 		{
@@ -3480,6 +3223,19 @@ namespace com.pathshala.Models
 			set
 			{
 				this._Medicals.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent1", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="StudentID")]
+		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
+		{
+			get
+			{
+				return this._FamilyMemberStudents;
+			}
+			set
+			{
+				this._FamilyMemberStudents.Assign(value);
 			}
 		}
 		
@@ -3617,6 +3373,18 @@ namespace com.pathshala.Models
 			entity.Student = null;
 		}
 		
+		private void attach_Medicals(Medical entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_Medicals(Medical entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
 		private void attach_FamilyMemberStudents(FamilyMemberStudent entity)
 		{
 			this.SendPropertyChanging();
@@ -3628,17 +3396,318 @@ namespace com.pathshala.Models
 			this.SendPropertyChanging();
 			entity.Student = null;
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.FamilyMemberStudents")]
+	public partial class FamilyMemberStudent : INotifyPropertyChanging, INotifyPropertyChanged
+	{
 		
-		private void attach_Medicals(Medical entity)
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _StudentID;
+		
+		private System.Nullable<int> _FamilyMemberID;
+		
+		private System.Nullable<int> _RelationshipType;
+		
+		private EntitySet<CICO> _CICOs;
+		
+		private EntitySet<CICO> _CICOs1;
+		
+		private EntityRef<FamilyMember> _FamilyMember;
+		
+		private EntityRef<Lookup> _Lookup;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    partial void OnFamilyMemberIDChanging(System.Nullable<int> value);
+    partial void OnFamilyMemberIDChanged();
+    partial void OnRelationshipTypeChanging(System.Nullable<int> value);
+    partial void OnRelationshipTypeChanged();
+    #endregion
+		
+		public FamilyMemberStudent()
 		{
-			this.SendPropertyChanging();
-			entity.Student = this;
+			this._CICOs = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs), new Action<CICO>(this.detach_CICOs));
+			this._CICOs1 = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs1), new Action<CICO>(this.detach_CICOs1));
+			this._FamilyMember = default(EntityRef<FamilyMember>);
+			this._Lookup = default(EntityRef<Lookup>);
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
 		}
 		
-		private void detach_Medicals(Medical entity)
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
+		public System.Nullable<int> StudentID
+		{
+			get
+			{
+				return this._StudentID;
+			}
+			set
+			{
+				if ((this._StudentID != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FamilyMemberID", DbType="Int")]
+		public System.Nullable<int> FamilyMemberID
+		{
+			get
+			{
+				return this._FamilyMemberID;
+			}
+			set
+			{
+				if ((this._FamilyMemberID != value))
+				{
+					if (this._FamilyMember.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFamilyMemberIDChanging(value);
+					this.SendPropertyChanging();
+					this._FamilyMemberID = value;
+					this.SendPropertyChanged("FamilyMemberID");
+					this.OnFamilyMemberIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RelationshipType", DbType="Int")]
+		public System.Nullable<int> RelationshipType
+		{
+			get
+			{
+				return this._RelationshipType;
+			}
+			set
+			{
+				if ((this._RelationshipType != value))
+				{
+					if (this._Lookup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnRelationshipTypeChanging(value);
+					this.SendPropertyChanging();
+					this._RelationshipType = value;
+					this.SendPropertyChanged("RelationshipType");
+					this.OnRelationshipTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="CheckedInBy")]
+		public EntitySet<CICO> CICOs
+		{
+			get
+			{
+				return this._CICOs;
+			}
+			set
+			{
+				this._CICOs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO1", Storage="_CICOs1", ThisKey="ID", OtherKey="CheckedOutBy")]
+		public EntitySet<CICO> CICOs1
+		{
+			get
+			{
+				return this._CICOs1;
+			}
+			set
+			{
+				this._CICOs1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent1", Storage="_FamilyMember", ThisKey="FamilyMemberID", OtherKey="ID", IsForeignKey=true)]
+		public FamilyMember FamilyMember
+		{
+			get
+			{
+				return this._FamilyMember.Entity;
+			}
+			set
+			{
+				FamilyMember previousValue = this._FamilyMember.Entity;
+				if (((previousValue != value) 
+							|| (this._FamilyMember.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FamilyMember.Entity = null;
+						previousValue.FamilyMemberStudents.Remove(this);
+					}
+					this._FamilyMember.Entity = value;
+					if ((value != null))
+					{
+						value.FamilyMemberStudents.Add(this);
+						this._FamilyMemberID = value.ID;
+					}
+					else
+					{
+						this._FamilyMemberID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("FamilyMember");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_FamilyMemberStudent1", Storage="_Lookup", ThisKey="RelationshipType", OtherKey="ID", IsForeignKey=true)]
+		public Lookup Lookup
+		{
+			get
+			{
+				return this._Lookup.Entity;
+			}
+			set
+			{
+				Lookup previousValue = this._Lookup.Entity;
+				if (((previousValue != value) 
+							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lookup.Entity = null;
+						previousValue.FamilyMemberStudents.Remove(this);
+					}
+					this._Lookup.Entity = value;
+					if ((value != null))
+					{
+						value.FamilyMemberStudents.Add(this);
+						this._RelationshipType = value.ID;
+					}
+					else
+					{
+						this._RelationshipType = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Lookup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent1", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.FamilyMemberStudents.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.FamilyMemberStudents.Add(this);
+						this._StudentID = value.ID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CICOs(CICO entity)
 		{
 			this.SendPropertyChanging();
-			entity.Student = null;
+			entity.FamilyMemberStudent11 = this;
+		}
+		
+		private void detach_CICOs(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMemberStudent11 = null;
+		}
+		
+		private void attach_CICOs1(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMemberStudent12 = this;
+		}
+		
+		private void detach_CICOs1(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.FamilyMemberStudent12 = null;
 		}
 	}
 }

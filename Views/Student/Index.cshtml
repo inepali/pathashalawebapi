@@ -59,6 +59,7 @@
         </td>
         <td class="text-right">
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+            @Html.ActionLink("Families", "Index", "FamilyMember", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
         </td>
     </tr>
     }

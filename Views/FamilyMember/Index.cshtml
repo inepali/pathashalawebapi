@@ -1,0 +1,66 @@
+﻿@model IEnumerable<com.pathshala.Models.FamilyMemberStudent>
+
+@{
+    ViewBag.Title = "Family Members";
+}
+
+<div class="row">
+    <div class="col-sm">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div class="col-sm text-right">
+        @Html.ActionLink("Create New", "Create", new { id = ViewData["StudentID"] }, new { @class = "btn btn-primary" })
+    </div>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Relationship
+        </th>
+        <th>
+            Full Name
+        </th>
+        <th>
+            CICO Code
+        </th>
+        <th>
+            Emergency Contact
+        </th>
+        <th>
+            Contact Person
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lookup.Display)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyMember.Person.DisplayFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyMember.CICOCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyMember.EmergencyContact)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyMember.EmergencyContactPerson)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>
+<a href="/Student" class="btn btn-light active" role="button" aria-pressed="true">Back to Students</a>
