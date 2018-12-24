@@ -1,5 +1,6 @@
 ﻿using com.pathshala.Models;
 using com.pathshala.Models.Dto;
+using com.pathshala.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,14 +35,7 @@ namespace com.pathshala.Controllers
             StudentModel model = new StudentModel();
             model.Student = new Student();
 
-            IEnumerable<NameValuePairModel> schools = from s in DB.Schools
-                                                      select new NameValuePairModel
-                                                      {
-                                                          Name = s.Name,
-                                                          Value = s.ID
-                                                      };
-
-            model.Schools = schools;
+            model.Schools = Utility.getSchoolsNameValue();
 
             return View(model);
         }
@@ -52,15 +46,8 @@ namespace com.pathshala.Controllers
         {
             try
             {
-                //Teacher teacher = new Teacher();
 
-
-                //UpdateModel()
-                //UpdateModel(teacher, collection.Teacher);
                 model.Student.Person.PersonType = (int)Person.Student;
-                //DB.Persons.InsertOnSubmit(model.Teacher.Person);
-
-                //                model.Teacher.PersonID = model.Teacher.Person.ID;
 
                 DB.Students.InsertOnSubmit(model.Student);
 
@@ -77,38 +64,51 @@ namespace com.pathshala.Controllers
         // GET: Student/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            StudentModel model = new StudentModel();
+            model.Student = (from s in DB.Students
+                             where s.ID == id
+                             select s).FirstOrDefault();
+
+            model.Schools = Utility.getSchoolsNameValue();
+            model.Grades = Utility.getGrades();
+
+            return View(model);
         }
 
         // POST: Student/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, StudentModel model)
         {
             try
             {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                Student student = (from s in DB.Students
+                                   where s.ID == id
+                                   select s).SingleOrDefault();
 
-        // GET: Student/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+                UpdateModel(student, "Student");
 
-        // POST: Student/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+                //if (model.GradeStudent.GradeID != null) {
+                //    GradeStudent grdStdnt = (from gs in DB.GradeStudents
+                //                             where gs.StudentID == id
+                //                             select gs).SingleOrDefault();
+
+                //    if (grdStdnt == null)
+                //    {
+                //        grdStdnt = new GradeStudent();
+                //        grdStdnt.GradeID = model.GradeStudent.GradeID;
+                //        grdStdnt.StudentID = id;
+                //        DB.GradeStudents.InsertOnSubmit(grdStdnt);
+                //    }
+                //    else {
+                //        grdStdnt.GradeID = model.GradeStudent.GradeID;
+                //    }
+
+                //   // DB.SubmitChanges();
+
+                //}
+
+                DB.SubmitChanges();
 
                 return RedirectToAction("Index");
             }

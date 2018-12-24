@@ -52,13 +52,12 @@
                 @Html.DisplayFor(modelItem => item.Person.LastName)
             </td>
             <td>
-                @*@Html.DisplayFor(modelItem => item.School.Name)*@
                 @Html.ActionLink(item.School.Name, "../School/Details/", new { id = item.School.ID })
             </td>
             <td>
                 @(item.IsAdmin.GetValueOrDefault() ? "Yes" : "No")
             </td>
-            <td>
+            <td class="text-right">
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
                 @*@Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })*@
             </td>

@@ -51,7 +51,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Teacher.SchoolID, "School", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Teacher.SchoolID, new SelectList(Model.Schools, "Value", "Name"))
+            @Html.DropDownListFor(model => model.Teacher.SchoolID, new SelectList(Model.Schools, "Value", "Name"), new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Teacher.SchoolID, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -62,19 +62,35 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Teacher.IsAdmin, "Admin", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Teacher.IsAdmin, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.RadioButtonFor(model => model.Teacher.IsAdmin, true, new { htmlAttributes = new { @class = "form-control" } }) Yes
+            @Html.RadioButtonFor(model => model.Teacher.IsAdmin, false, new { htmlAttributes = new { @class = "form-control" } }) No
             @Html.ValidationMessageFor(model => model.Teacher.IsAdmin, "", new { @class = "text-danger" })
+
+            @*Yes   @Html.RadioButton("IsAdmin", "Yes")
+            No @Html.RadioButton("IsAdmin", "No")
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                <label class="form-check-label" for="exampleRadios1">
+                    Yes
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                <label class="form-check-label" for="exampleRadios2">
+                    No
+                </label>
+            </div>*@
+
         </div>
     </div>
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-primary" />
+            <input type="submit" value="Create" class="btn btn-primary" />  
+            <a href="/Teacher" class="btn btn-light active" role="button" aria-pressed="true">Cancel</a>
         </div>
     </div>
 </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

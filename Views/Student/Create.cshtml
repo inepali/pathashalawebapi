@@ -52,7 +52,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Student.SchoolID, "School", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(model => model.Student.SchoolID, new SelectList(Model.Schools, "Value", "Name"))
+            @Html.DropDownListFor(model => model.Student.SchoolID, new SelectList(Model.Schools, "Value", "Name"), new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.Student.SchoolID, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -65,11 +65,8 @@
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
             <input type="submit" value="Create" class="btn btn-primary" />
+            <a href="/Student" class="btn btn-light active" role="button" aria-pressed="true">Cancel</a>
         </div>
     </div>
 </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

@@ -19,13 +19,16 @@
             #
         </th>
         <th>
-           First Name
+            First Name
         </th>
         <th>
             Last Name
         </th>
         <th>
             School
+        </th>
+        <th>
+            Grade
         </th>
         <th>
             Date Of Birth
@@ -49,11 +52,13 @@
             @Html.DisplayFor(modelItem => item.School.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
+            @Html.DisplayFor(modelItem => item.Grade.Lookup.Display)
+        </td>
+        <td>
+            @com.pathshala.Utils.Utility.formatDate(item.DateOfBirth)
         </td>
         <td class="text-right">
             @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
-            @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
         </td>
     </tr>
     }

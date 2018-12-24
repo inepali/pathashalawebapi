@@ -1,7 +1,7 @@
 ﻿@model com.pathshala.Models.Dto.TeacherModel
 
 @{
-    ViewBag.Title = "Add Teacher";
+    ViewBag.Title = "Update Teacher";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -51,7 +51,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Teacher.SchoolID, "School", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Teacher.SchoolID, new SelectList(Model.Schools, "Value", "Name"))
+                @Html.DropDownListFor(model => model.Teacher.SchoolID, new SelectList(Model.Schools, "Value", "Name"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Teacher.SchoolID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -62,7 +62,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Teacher.IsAdmin, "Admin", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Teacher.IsAdmin, new { htmlAttributes = new { @class = "form-control" } })
+                @*@Html.EditorFor(model => model.Teacher.IsAdmin, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.RadioButtonFor(model => model.Teacher.IsAdmin, true, new { htmlAttributes = new { @class = "form-control" } }) Yes
+                @Html.RadioButtonFor(model => model.Teacher.IsAdmin, false, new { htmlAttributes = new { @class = "form-control" } }) No
                 @Html.ValidationMessageFor(model => model.Teacher.IsAdmin, "", new { @class = "text-danger" })
             </div>
         </div>

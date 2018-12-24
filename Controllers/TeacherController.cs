@@ -1,5 +1,6 @@
 ﻿using com.pathshala.Models;
 using com.pathshala.Models.Dto;
+using com.pathshala.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,23 +39,9 @@ namespace com.pathshala.Controllers
             TeacherModel model = new TeacherModel();
             model.Teacher = new Teacher();
 
-            IEnumerable<NameValuePairModel> schools = from s in DB.Schools
-                                                      select new NameValuePairModel
-                                                      {
-                                                          Name = s.Name,
-                                                          Value = s.ID
-                                                      };
 
 
-            //IEnumerable<NameValuePairModel> roles = from lk in DB.Lookups
-            //                                        where lk.Name.Equals("PERSON")
-            //                                        select new NameValuePairModel
-            //                                        {
-            //                                            Name = lk.Display,
-            //                                            Value = lk.ID
-            //                                        };
-            //model.Roles = roles;
-            model.Schools = schools;
+            model.Schools = Utility.getSchoolsNameValue();
 
             return View(model);
         }
@@ -65,7 +52,6 @@ namespace com.pathshala.Controllers
         {
             try
             {
-
                 model.Teacher.Person.PersonType = (int)Person.Teacher;
 
                 DB.Teachers.InsertOnSubmit(model.Teacher);
@@ -91,16 +77,7 @@ namespace com.pathshala.Controllers
                              where t.ID == id
                              select t).FirstOrDefault();
 
-            IEnumerable<NameValuePairModel> schools = from s in DB.Schools
-                                                      select new NameValuePairModel
-                                                      {
-                                                          Name = s.Name,
-                                                          Value = s.ID
-                                                      };
-
-
-
-            model.Schools = schools;
+            model.Schools = Utility.getSchoolsNameValue();
 
             return View(model);
 
@@ -132,26 +109,5 @@ namespace com.pathshala.Controllers
 
         }
 
-        //// GET: Teacher/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: Teacher/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
-
-        //        //return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }
