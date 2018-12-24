@@ -59,18 +59,33 @@ namespace com.pathshala.Controllers
         // GET: FamilyMember/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            FamilyMemberStudentModel fmsm = new FamilyMemberStudentModel();
+
+            fmsm.FamilyMemberStudent = (from fms in DB.FamilyMemberStudents
+                                       where fms.ID == id
+                                       select fms).SingleOrDefault();
+
+            fmsm.RelationshipTypes = Utility.getLookupByName("RELATION");
+
+            return View(fmsm);
+
+            
         }
 
         // POST: FamilyMember/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, FamilyMemberStudentModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                FamilyMemberStudent fmMemStud = (from fms in DB.FamilyMemberStudents
+                                            where fms.ID == id
+                                            select fms).SingleOrDefault();
 
-                return RedirectToAction("Index");
+                TryUpdateModel(fmMemStud, "FamilyMemberStudent");
+                DB.SubmitChanges();
+
+                return RedirectToAction("Index", new { id = fmMemStud.StudentID });
             }
             catch
             {
