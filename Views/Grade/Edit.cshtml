@@ -1,0 +1,46 @@
+﻿@model com.pathshala.Models.Dto.GradeModel
+
+@{
+    ViewBag.Title = "Update Grades";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Grade.GradeType, "Grade", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Grade.GradeType, new SelectList(Model.Grades, "Value", "Name"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Grade.GradeType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Grade.SchoolID, "School", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Grade.SchoolID, new SelectList(Model.Schools, "Value", "Name"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Grade.SchoolID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Grade.TeacherID, "Teacher", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Grade.TeacherID, new SelectList(Model.Teachers, "Value", "Name"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Grade.TeacherID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a href="/Grade" class="btn btn-light active" role="button" aria-pressed="true">Cancel</a>
+            </div>
+        </div>
+    </div>
+}

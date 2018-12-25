@@ -30,9 +30,6 @@ namespace com.pathshala.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertSchool(School instance);
-    partial void UpdateSchool(School instance);
-    partial void DeleteSchool(School instance);
     partial void InsertActivity(Activity instance);
     partial void UpdateActivity(Activity instance);
     partial void DeleteActivity(Activity instance);
@@ -66,6 +63,9 @@ namespace com.pathshala.Models
     partial void InsertFamilyMemberStudent(FamilyMemberStudent instance);
     partial void UpdateFamilyMemberStudent(FamilyMemberStudent instance);
     partial void DeleteFamilyMemberStudent(FamilyMemberStudent instance);
+    partial void InsertSchool(School instance);
+    partial void UpdateSchool(School instance);
+    partial void DeleteSchool(School instance);
     #endregion
 		
 		public PathshalaModelsDataContext() : 
@@ -96,14 +96,6 @@ namespace com.pathshala.Models
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<School> Schools
-		{
-			get
-			{
-				return this.GetTable<School>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Activity> Activities
@@ -193,395 +185,13 @@ namespace com.pathshala.Models
 				return this.GetTable<FamilyMemberStudent>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Schools")]
-	public partial class School : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Name;
-		
-		private System.Data.Linq.Binary _About;
-		
-		private string _Address;
-		
-		private string _Phone;
-		
-		private string _Email;
-		
-		private string _Fax;
-		
-		private string _FacebookUrl;
-		
-		private string _YouTubeUrl;
-		
-		private string _TwiterUrl;
-		
-		private EntitySet<CICO> _CICOs;
-		
-		private EntitySet<Teacher> _Teachers;
-		
-		private EntitySet<Grade> _Grades;
-		
-		private EntitySet<Student> _Students;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnAboutChanging(System.Data.Linq.Binary value);
-    partial void OnAboutChanged();
-    partial void OnAddressChanging(string value);
-    partial void OnAddressChanged();
-    partial void OnPhoneChanging(string value);
-    partial void OnPhoneChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
-    partial void OnFaxChanging(string value);
-    partial void OnFaxChanged();
-    partial void OnFacebookUrlChanging(string value);
-    partial void OnFacebookUrlChanged();
-    partial void OnYouTubeUrlChanging(string value);
-    partial void OnYouTubeUrlChanged();
-    partial void OnTwiterUrlChanging(string value);
-    partial void OnTwiterUrlChanged();
-    #endregion
-		
-		public School()
-		{
-			this._CICOs = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs), new Action<CICO>(this.detach_CICOs));
-			this._Teachers = new EntitySet<Teacher>(new Action<Teacher>(this.attach_Teachers), new Action<Teacher>(this.detach_Teachers));
-			this._Grades = new EntitySet<Grade>(new Action<Grade>(this.attach_Grades), new Action<Grade>(this.detach_Grades));
-			this._Students = new EntitySet<Student>(new Action<Student>(this.attach_Students), new Action<Student>(this.detach_Students));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
+		public System.Data.Linq.Table<School> Schools
 		{
 			get
 			{
-				return this._ID;
+				return this.GetTable<School>();
 			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_About", DbType="VarBinary(MAX)", UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary About
-		{
-			get
-			{
-				return this._About;
-			}
-			set
-			{
-				if ((this._About != value))
-				{
-					this.OnAboutChanging(value);
-					this.SendPropertyChanging();
-					this._About = value;
-					this.SendPropertyChanged("About");
-					this.OnAboutChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(250)")]
-		public string Address
-		{
-			get
-			{
-				return this._Address;
-			}
-			set
-			{
-				if ((this._Address != value))
-				{
-					this.OnAddressChanging(value);
-					this.SendPropertyChanging();
-					this._Address = value;
-					this.SendPropertyChanged("Address");
-					this.OnAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(15)")]
-		public string Phone
-		{
-			get
-			{
-				return this._Phone;
-			}
-			set
-			{
-				if ((this._Phone != value))
-				{
-					this.OnPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._Phone = value;
-					this.SendPropertyChanged("Phone");
-					this.OnPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fax", DbType="VarChar(10)")]
-		public string Fax
-		{
-			get
-			{
-				return this._Fax;
-			}
-			set
-			{
-				if ((this._Fax != value))
-				{
-					this.OnFaxChanging(value);
-					this.SendPropertyChanging();
-					this._Fax = value;
-					this.SendPropertyChanged("Fax");
-					this.OnFaxChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FacebookUrl", DbType="VarChar(500)")]
-		public string FacebookUrl
-		{
-			get
-			{
-				return this._FacebookUrl;
-			}
-			set
-			{
-				if ((this._FacebookUrl != value))
-				{
-					this.OnFacebookUrlChanging(value);
-					this.SendPropertyChanging();
-					this._FacebookUrl = value;
-					this.SendPropertyChanged("FacebookUrl");
-					this.OnFacebookUrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YouTubeUrl", DbType="VarChar(500)")]
-		public string YouTubeUrl
-		{
-			get
-			{
-				return this._YouTubeUrl;
-			}
-			set
-			{
-				if ((this._YouTubeUrl != value))
-				{
-					this.OnYouTubeUrlChanging(value);
-					this.SendPropertyChanging();
-					this._YouTubeUrl = value;
-					this.SendPropertyChanged("YouTubeUrl");
-					this.OnYouTubeUrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TwiterUrl", DbType="VarChar(500)")]
-		public string TwiterUrl
-		{
-			get
-			{
-				return this._TwiterUrl;
-			}
-			set
-			{
-				if ((this._TwiterUrl != value))
-				{
-					this.OnTwiterUrlChanging(value);
-					this.SendPropertyChanging();
-					this._TwiterUrl = value;
-					this.SendPropertyChanged("TwiterUrl");
-					this.OnTwiterUrlChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="StudentID")]
-		public EntitySet<CICO> CICOs
-		{
-			get
-			{
-				return this._CICOs;
-			}
-			set
-			{
-				this._CICOs.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Teacher", Storage="_Teachers", ThisKey="ID", OtherKey="SchoolID")]
-		public EntitySet<Teacher> Teachers
-		{
-			get
-			{
-				return this._Teachers;
-			}
-			set
-			{
-				this._Teachers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Grade", Storage="_Grades", ThisKey="ID", OtherKey="SchoolID")]
-		public EntitySet<Grade> Grades
-		{
-			get
-			{
-				return this._Grades;
-			}
-			set
-			{
-				this._Grades.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Student", Storage="_Students", ThisKey="ID", OtherKey="SchoolID")]
-		public EntitySet<Student> Students
-		{
-			get
-			{
-				return this._Students;
-			}
-			set
-			{
-				this._Students.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_CICOs(CICO entity)
-		{
-			this.SendPropertyChanging();
-			entity.School = this;
-		}
-		
-		private void detach_CICOs(CICO entity)
-		{
-			this.SendPropertyChanging();
-			entity.School = null;
-		}
-		
-		private void attach_Teachers(Teacher entity)
-		{
-			this.SendPropertyChanging();
-			entity.School = this;
-		}
-		
-		private void detach_Teachers(Teacher entity)
-		{
-			this.SendPropertyChanging();
-			entity.School = null;
-		}
-		
-		private void attach_Grades(Grade entity)
-		{
-			this.SendPropertyChanging();
-			entity.School = this;
-		}
-		
-		private void detach_Grades(Grade entity)
-		{
-			this.SendPropertyChanging();
-			entity.School = null;
-		}
-		
-		private void attach_Students(Student entity)
-		{
-			this.SendPropertyChanging();
-			entity.School = this;
-		}
-		
-		private void detach_Students(Student entity)
-		{
-			this.SendPropertyChanging();
-			entity.School = null;
 		}
 	}
 	
@@ -895,11 +505,11 @@ namespace com.pathshala.Models
 		
 		private System.Nullable<int> _CheckedOutBy;
 		
-		private EntityRef<School> _School;
-		
 		private EntityRef<FamilyMemberStudent> _FamilyMemberStudent11;
 		
 		private EntityRef<FamilyMemberStudent> _FamilyMemberStudent12;
+		
+		private EntityRef<School> _School;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -921,9 +531,9 @@ namespace com.pathshala.Models
 		
 		public CICO()
 		{
-			this._School = default(EntityRef<School>);
 			this._FamilyMemberStudent11 = default(EntityRef<FamilyMemberStudent>);
 			this._FamilyMemberStudent12 = default(EntityRef<FamilyMemberStudent>);
+			this._School = default(EntityRef<School>);
 			OnCreated();
 		}
 		
@@ -1059,40 +669,6 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_CICO", Storage="_School", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
-		public School School
-		{
-			get
-			{
-				return this._School.Entity;
-			}
-			set
-			{
-				School previousValue = this._School.Entity;
-				if (((previousValue != value) 
-							|| (this._School.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._School.Entity = null;
-						previousValue.CICOs.Remove(this);
-					}
-					this._School.Entity = value;
-					if ((value != null))
-					{
-						value.CICOs.Add(this);
-						this._StudentID = value.ID;
-					}
-					else
-					{
-						this._StudentID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("School");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO", Storage="_FamilyMemberStudent11", ThisKey="CheckedInBy", OtherKey="ID", IsForeignKey=true)]
 		public FamilyMemberStudent FamilyMemberStudent11
 		{
@@ -1157,6 +733,40 @@ namespace com.pathshala.Models
 						this._CheckedOutBy = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("FamilyMemberStudent12");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_CICO", Storage="_School", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		public School School
+		{
+			get
+			{
+				return this._School.Entity;
+			}
+			set
+			{
+				School previousValue = this._School.Entity;
+				if (((previousValue != value) 
+							|| (this._School.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._School.Entity = null;
+						previousValue.CICOs.Remove(this);
+					}
+					this._School.Entity = value;
+					if ((value != null))
+					{
+						value.CICOs.Add(this);
+						this._StudentID = value.ID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("School");
 				}
 			}
 		}
@@ -2459,7 +2069,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Teacher", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Teacher", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
 		public School School
 		{
 			get
@@ -2764,11 +2374,11 @@ namespace com.pathshala.Models
 		
 		private EntitySet<Student> _Students;
 		
-		private EntityRef<School> _School;
-		
 		private EntityRef<Teacher> _Teacher;
 		
 		private EntityRef<Lookup> _Lookup;
+		
+		private EntityRef<School> _School;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2787,9 +2397,9 @@ namespace com.pathshala.Models
 		public Grade()
 		{
 			this._Students = new EntitySet<Student>(new Action<Student>(this.attach_Students), new Action<Student>(this.detach_Students));
-			this._School = default(EntityRef<School>);
 			this._Teacher = default(EntityRef<Teacher>);
 			this._Lookup = default(EntityRef<Lookup>);
+			this._School = default(EntityRef<School>);
 			OnCreated();
 		}
 		
@@ -2898,40 +2508,6 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Grade", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
-		public School School
-		{
-			get
-			{
-				return this._School.Entity;
-			}
-			set
-			{
-				School previousValue = this._School.Entity;
-				if (((previousValue != value) 
-							|| (this._School.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._School.Entity = null;
-						previousValue.Grades.Remove(this);
-					}
-					this._School.Entity = value;
-					if ((value != null))
-					{
-						value.Grades.Add(this);
-						this._SchoolID = value.ID;
-					}
-					else
-					{
-						this._SchoolID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("School");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Teacher_Grade", Storage="_Teacher", ThisKey="TeacherID", OtherKey="ID", IsForeignKey=true)]
 		public Teacher Teacher
 		{
@@ -2996,6 +2572,40 @@ namespace com.pathshala.Models
 						this._GradeType = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Lookup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Grade", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		public School School
+		{
+			get
+			{
+				return this._School.Entity;
+			}
+			set
+			{
+				School previousValue = this._School.Entity;
+				if (((previousValue != value) 
+							|| (this._School.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._School.Entity = null;
+						previousValue.Grades.Remove(this);
+					}
+					this._School.Entity = value;
+					if ((value != null))
+					{
+						value.Grades.Add(this);
+						this._SchoolID = value.ID;
+					}
+					else
+					{
+						this._SchoolID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("School");
 				}
 			}
 		}
@@ -3307,7 +2917,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Student", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Student", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
 		public School School
 		{
 			get
@@ -3708,6 +3318,420 @@ namespace com.pathshala.Models
 		{
 			this.SendPropertyChanging();
 			entity.FamilyMemberStudent12 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Schools")]
+	public partial class School : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private string _About;
+		
+		private string _Address;
+		
+		private string _Phone;
+		
+		private string _Email;
+		
+		private string _Fax;
+		
+		private string _FacebookUrl;
+		
+		private string _YouTubeUrl;
+		
+		private string _TwiterUrl;
+		
+		private System.Nullable<bool> _IsActive;
+		
+		private EntitySet<CICO> _CICOs;
+		
+		private EntitySet<Teacher> _Teachers;
+		
+		private EntitySet<Grade> _Grades;
+		
+		private EntitySet<Student> _Students;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnAboutChanging(string value);
+    partial void OnAboutChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnFaxChanging(string value);
+    partial void OnFaxChanged();
+    partial void OnFacebookUrlChanging(string value);
+    partial void OnFacebookUrlChanged();
+    partial void OnYouTubeUrlChanging(string value);
+    partial void OnYouTubeUrlChanged();
+    partial void OnTwiterUrlChanging(string value);
+    partial void OnTwiterUrlChanged();
+    partial void OnIsActiveChanging(System.Nullable<bool> value);
+    partial void OnIsActiveChanged();
+    #endregion
+		
+		public School()
+		{
+			this._CICOs = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs), new Action<CICO>(this.detach_CICOs));
+			this._Teachers = new EntitySet<Teacher>(new Action<Teacher>(this.attach_Teachers), new Action<Teacher>(this.detach_Teachers));
+			this._Grades = new EntitySet<Grade>(new Action<Grade>(this.attach_Grades), new Action<Grade>(this.detach_Grades));
+			this._Students = new EntitySet<Student>(new Action<Student>(this.attach_Students), new Action<Student>(this.detach_Students));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_About", DbType="VarChar(MAX)")]
+		public string About
+		{
+			get
+			{
+				return this._About;
+			}
+			set
+			{
+				if ((this._About != value))
+				{
+					this.OnAboutChanging(value);
+					this.SendPropertyChanging();
+					this._About = value;
+					this.SendPropertyChanged("About");
+					this.OnAboutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(250)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(15)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="VarChar(250) NOT NULL", CanBeNull=false)]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fax", DbType="VarChar(10)")]
+		public string Fax
+		{
+			get
+			{
+				return this._Fax;
+			}
+			set
+			{
+				if ((this._Fax != value))
+				{
+					this.OnFaxChanging(value);
+					this.SendPropertyChanging();
+					this._Fax = value;
+					this.SendPropertyChanged("Fax");
+					this.OnFaxChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FacebookUrl", DbType="VarChar(500)")]
+		public string FacebookUrl
+		{
+			get
+			{
+				return this._FacebookUrl;
+			}
+			set
+			{
+				if ((this._FacebookUrl != value))
+				{
+					this.OnFacebookUrlChanging(value);
+					this.SendPropertyChanging();
+					this._FacebookUrl = value;
+					this.SendPropertyChanged("FacebookUrl");
+					this.OnFacebookUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_YouTubeUrl", DbType="VarChar(500)")]
+		public string YouTubeUrl
+		{
+			get
+			{
+				return this._YouTubeUrl;
+			}
+			set
+			{
+				if ((this._YouTubeUrl != value))
+				{
+					this.OnYouTubeUrlChanging(value);
+					this.SendPropertyChanging();
+					this._YouTubeUrl = value;
+					this.SendPropertyChanged("YouTubeUrl");
+					this.OnYouTubeUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TwiterUrl", DbType="VarChar(500)")]
+		public string TwiterUrl
+		{
+			get
+			{
+				return this._TwiterUrl;
+			}
+			set
+			{
+				if ((this._TwiterUrl != value))
+				{
+					this.OnTwiterUrlChanging(value);
+					this.SendPropertyChanging();
+					this._TwiterUrl = value;
+					this.SendPropertyChanged("TwiterUrl");
+					this.OnTwiterUrlChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit")]
+		public System.Nullable<bool> IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="StudentID")]
+		public EntitySet<CICO> CICOs
+		{
+			get
+			{
+				return this._CICOs;
+			}
+			set
+			{
+				this._CICOs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Teacher", Storage="_Teachers", ThisKey="ID", OtherKey="SchoolID")]
+		public EntitySet<Teacher> Teachers
+		{
+			get
+			{
+				return this._Teachers;
+			}
+			set
+			{
+				this._Teachers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Grade", Storage="_Grades", ThisKey="ID", OtherKey="SchoolID")]
+		public EntitySet<Grade> Grades
+		{
+			get
+			{
+				return this._Grades;
+			}
+			set
+			{
+				this._Grades.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Student", Storage="_Students", ThisKey="ID", OtherKey="SchoolID")]
+		public EntitySet<Student> Students
+		{
+			get
+			{
+				return this._Students;
+			}
+			set
+			{
+				this._Students.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_CICOs(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = this;
+		}
+		
+		private void detach_CICOs(CICO entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = null;
+		}
+		
+		private void attach_Teachers(Teacher entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = this;
+		}
+		
+		private void detach_Teachers(Teacher entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = null;
+		}
+		
+		private void attach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = this;
+		}
+		
+		private void detach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = null;
+		}
+		
+		private void attach_Students(Student entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = this;
+		}
+		
+		private void detach_Students(Student entity)
+		{
+			this.SendPropertyChanging();
+			entity.School = null;
 		}
 	}
 }

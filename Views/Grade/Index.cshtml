@@ -9,10 +9,7 @@
         <h2>@ViewBag.Title</h2>
     </div>
     <div class="col-sm text-right">
-        @*@Html.ActionLink("+ Create New", "Create")*@
-
         @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
-        @*<a class="btn btn-primary" href="/Teacher/Create" role="button"><span class="glyphicons glyphicon-plus"></span> Create New</a>*@
     </div>
 </div>
 
@@ -53,7 +50,7 @@
             @Html.DisplayFor(modelItem => item.Teacher.Person.DisplayFullName)
         </td>
         <td class="text-right">
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "btn btn-primary btn-sm" })
         </td>
     </tr>
 }

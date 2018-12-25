@@ -35,7 +35,6 @@ namespace com.pathshala.Controllers
 
             model.Teachers = Utility.getTeachersNameValue();
 
-
             model.Schools = Utility.getSchoolsNameValue();
            
 
@@ -63,16 +62,35 @@ namespace com.pathshala.Controllers
         // GET: Grade/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+
+            GradeModel model = new GradeModel();
+            model.Grade = (from g in DB.Grades
+                           where g.ID == id
+                           select g).SingleOrDefault();
+
+            model.Grades = Utility.getLookupByName("GRADE");
+
+            model.Teachers = Utility.getTeachersNameValue();
+
+            model.Schools = Utility.getSchoolsNameValue();
+
+
+            return View(model);
         }
 
         // POST: Grade/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, GradeModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                Grade grade = (from g in DB.Grades
+                         where g.ID == id
+                         select g).SingleOrDefault();
+
+
+                UpdateModel(grade, "Grade");
+                DB.SubmitChanges();
 
                 return RedirectToAction("Index");
             }

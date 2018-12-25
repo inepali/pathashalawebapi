@@ -1,0 +1,84 @@
+﻿@model IEnumerable<com.pathshala.Models.School>
+
+@{
+    ViewBag.Title = "Schools";
+}
+<div class="row">
+    <div class="col-sm">
+        <h2>@ViewBag.Title</h2>
+    </div>
+    <div class="col-sm text-right">
+        <a href="@Url.Action("Enroll")" class="btn btn-primary">
+            <i class="fas fa-plus" title="Enroll"></i>  Enroll
+        </a>
+
+    </div>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>
+            #
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Phone
+        </th>
+
+        <th>
+            Email
+        </th>
+
+        <th>
+            <span class='fas fa-link'></span> Social
+        </th>
+        <th>
+            
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => item.ID)</td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.Raw(com.pathshala.Utils.Utility.getSocialLink(item.FacebookUrl, "fab fa-facebook"))
+            @Html.Raw(@com.pathshala.Utils.Utility.getSocialLink(item.YouTubeUrl, "fab fa-youtube-square"))
+            @Html.Raw(@com.pathshala.Utils.Utility.getSocialLink(item.TwiterUrl, "fab fa-twitter-square"))
+        </td>
+        <td class="text-right">
+
+            <a href="@Url.Action("Edit", new { id = item.ID })" class="btn btn-primary  btn-sm">
+                <i class="fas fa-user-edit" title="Edit"></i>
+            </a>
+
+
+            <a href="@Url.Action("School", "Teacher", new { id = item.ID })" class="btn btn-outline-primary  btn-sm">
+                <i class="fas fa-user-tie" title="Teachers"></i>
+            </a>
+
+            <a href="@Url.Action("School", "Student", new { id = item.ID })" class="btn btn-outline-primary  btn-sm">
+                <i class="fas fa-users" title="Students"></i>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>

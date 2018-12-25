@@ -74,19 +74,35 @@ namespace com.pathshala.Utils
 
         public static IEnumerable<NameValuePairModel> getGrades()
         {
-            IEnumerable<NameValuePairModel> grades =  from g in DB.Grades
-                   select new NameValuePairModel
-                   {
-                       Name = getNameFromGrade(g),
-                       Value = g.ID
-                   };
+            IEnumerable<NameValuePairModel> grades = from g in DB.Grades
+                                                     select new NameValuePairModel
+                                                     {
+                                                         Name = getNameFromGrade(g),
+                                                         Value = g.ID
+                                                     };
 
             return grades;
         }
 
+        public static string getSocialLink(string url, string icon)
+        {
+            string html = @"";
+            if (url != null)
+            {
+                //html = "<a  href='" + url + "' role='button'><span class='fab " + icon + "'></span></a>";
+                html = "<a href='" + url + "' class='btn btn-primary btn-sm'><i class='fab " + icon + "'></i></a>";
+            }
+            return html;
+        }
+        /// <summary>
+        ///  Some Private Methods
+        /// </summary>
+        /// <param name="g"></param>
+        /// <returns></returns>
+
         private static string getNameFromGrade(Grade g)
         {
-            return g.School.Name.ToString() + " - " + g.Lookup.Display.ToString() + " - " + g.Teacher.Person.DisplayFullName.ToString();;
+            return g.School.Name.ToString() + " - " + g.Lookup.Display.ToString() + " - " + g.Teacher.Person.DisplayFullName.ToString(); ;
         }
     }
 }

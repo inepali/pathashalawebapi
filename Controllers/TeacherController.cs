@@ -23,6 +23,16 @@ namespace com.pathshala.Controllers
             return View(teachers.ToList());
         }
 
+        // GET: Teacher/School/{School ID}
+        public ActionResult School(int id)
+        {
+            IEnumerable<Teacher> teachers = from t in DB.Teachers
+                                            where t.SchoolID == id
+                                            select t;
+
+            return View("Index", teachers.ToList());
+        }
+
 
 
         // GET: Teacher/Details/5
