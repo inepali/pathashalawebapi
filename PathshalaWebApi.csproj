@@ -177,6 +177,7 @@
     <Compile Include="Controllers\FamilyMemberController.cs" />
     <Compile Include="Controllers\GradeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LookupController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
@@ -318,6 +319,9 @@
     <Content Include="Views\School\Enroll.cshtml" />
     <Content Include="Views\School\Edit.cshtml" />
     <Content Include="Views\Grade\Edit.cshtml" />
+    <Content Include="Views\Lookup\Index.cshtml" />
+    <Content Include="Views\Lookup\Create.cshtml" />
+    <Content Include="Views\Lookup\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

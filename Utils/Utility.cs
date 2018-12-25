@@ -41,7 +41,8 @@ namespace com.pathshala.Utils
         public static IEnumerable<NameValuePairModel> getLookupByName(String name)
         {
             return from lk in DB.Lookups
-                   where lk.Name.Equals(name)
+                   where lk.Name.Equals(name) && lk.IsActive == true
+                   orderby lk.SortOrder ascending
                    select new NameValuePairModel
                    {
                        Name = lk.Display,

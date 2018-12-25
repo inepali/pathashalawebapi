@@ -51,9 +51,6 @@ namespace com.pathshala.Models
     partial void InsertTeacher(Teacher instance);
     partial void UpdateTeacher(Teacher instance);
     partial void DeleteTeacher(Teacher instance);
-    partial void InsertLookup(Lookup instance);
-    partial void UpdateLookup(Lookup instance);
-    partial void DeleteLookup(Lookup instance);
     partial void InsertGrade(Grade instance);
     partial void UpdateGrade(Grade instance);
     partial void DeleteGrade(Grade instance);
@@ -66,6 +63,9 @@ namespace com.pathshala.Models
     partial void InsertSchool(School instance);
     partial void UpdateSchool(School instance);
     partial void DeleteSchool(School instance);
+    partial void InsertLookup(Lookup instance);
+    partial void UpdateLookup(Lookup instance);
+    partial void DeleteLookup(Lookup instance);
     #endregion
 		
 		public PathshalaModelsDataContext() : 
@@ -154,14 +154,6 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<Lookup> Lookups
-		{
-			get
-			{
-				return this.GetTable<Lookup>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Grade> Grades
 		{
 			get
@@ -193,6 +185,14 @@ namespace com.pathshala.Models
 				return this.GetTable<School>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Lookup> Lookups
+		{
+			get
+			{
+				return this.GetTable<Lookup>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Activities")]
@@ -215,9 +215,9 @@ namespace com.pathshala.Models
 		
 		private EntitySet<Notification> _Notifications;
 		
-		private EntityRef<Lookup> _Lookup;
-		
 		private EntityRef<Student> _Student;
+		
+		private EntityRef<Lookup> _Lookup;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -240,8 +240,8 @@ namespace com.pathshala.Models
 		public Activity()
 		{
 			this._Notifications = new EntitySet<Notification>(new Action<Notification>(this.attach_Notifications), new Action<Notification>(this.detach_Notifications));
-			this._Lookup = default(EntityRef<Lookup>);
 			this._Student = default(EntityRef<Student>);
+			this._Lookup = default(EntityRef<Lookup>);
 			OnCreated();
 		}
 		
@@ -386,40 +386,6 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Activity", Storage="_Lookup", ThisKey="ActivityType", OtherKey="ID", IsForeignKey=true)]
-		public Lookup Lookup
-		{
-			get
-			{
-				return this._Lookup.Entity;
-			}
-			set
-			{
-				Lookup previousValue = this._Lookup.Entity;
-				if (((previousValue != value) 
-							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Lookup.Entity = null;
-						previousValue.Activities.Remove(this);
-					}
-					this._Lookup.Entity = value;
-					if ((value != null))
-					{
-						value.Activities.Add(this);
-						this._ActivityType = value.ID;
-					}
-					else
-					{
-						this._ActivityType = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Lookup");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Activity", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
 		public Student Student
 		{
@@ -450,6 +416,40 @@ namespace com.pathshala.Models
 						this._StudentID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Activity", Storage="_Lookup", ThisKey="ActivityType", OtherKey="ID", IsForeignKey=true)]
+		public Lookup Lookup
+		{
+			get
+			{
+				return this._Lookup.Entity;
+			}
+			set
+			{
+				Lookup previousValue = this._Lookup.Entity;
+				if (((previousValue != value) 
+							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lookup.Entity = null;
+						previousValue.Activities.Remove(this);
+					}
+					this._Lookup.Entity = value;
+					if ((value != null))
+					{
+						value.Activities.Add(this);
+						this._ActivityType = value.ID;
+					}
+					else
+					{
+						this._ActivityType = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Lookup");
 				}
 			}
 		}
@@ -669,7 +669,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO", Storage="_FamilyMemberStudent11", ThisKey="CheckedInBy", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO", Storage="_FamilyMemberStudent11", ThisKey="CheckedInBy", OtherKey="ID", IsForeignKey=true)]
 		public FamilyMemberStudent FamilyMemberStudent11
 		{
 			get
@@ -703,7 +703,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO1", Storage="_FamilyMemberStudent12", ThisKey="CheckedOutBy", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO1", Storage="_FamilyMemberStudent12", ThisKey="CheckedOutBy", OtherKey="ID", IsForeignKey=true)]
 		public FamilyMemberStudent FamilyMemberStudent12
 		{
 			get
@@ -737,7 +737,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_CICO", Storage="_School", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_CICO", Storage="_School", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
 		public School School
 		{
 			get
@@ -1224,7 +1224,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Notification", Storage="_Lookup", ThisKey="NotificationType", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Notification", Storage="_Lookup", ThisKey="NotificationType", OtherKey="ID", IsForeignKey=true)]
 		public Lookup Lookup
 		{
 			get
@@ -1812,7 +1812,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent1", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="FamilyMemberID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="FamilyMemberID")]
 		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
 		{
 			get
@@ -2069,7 +2069,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Teacher", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Teacher", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
 		public School School
 		{
 			get
@@ -2136,228 +2136,6 @@ namespace com.pathshala.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Lookups")]
-	public partial class Lookup : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private string _Name;
-		
-		private string _Display;
-		
-		private EntitySet<Activity> _Activities;
-		
-		private EntitySet<Notification> _Notifications;
-		
-		private EntitySet<Grade> _Grades;
-		
-		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnDisplayChanging(string value);
-    partial void OnDisplayChanged();
-    #endregion
-		
-		public Lookup()
-		{
-			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
-			this._Notifications = new EntitySet<Notification>(new Action<Notification>(this.attach_Notifications), new Action<Notification>(this.detach_Notifications));
-			this._Grades = new EntitySet<Grade>(new Action<Grade>(this.attach_Grades), new Action<Grade>(this.detach_Grades));
-			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Display", DbType="VarChar(500)")]
-		public string Display
-		{
-			get
-			{
-				return this._Display;
-			}
-			set
-			{
-				if ((this._Display != value))
-				{
-					this.OnDisplayChanging(value);
-					this.SendPropertyChanging();
-					this._Display = value;
-					this.SendPropertyChanged("Display");
-					this.OnDisplayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Activity", Storage="_Activities", ThisKey="ID", OtherKey="ActivityType")]
-		public EntitySet<Activity> Activities
-		{
-			get
-			{
-				return this._Activities;
-			}
-			set
-			{
-				this._Activities.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Notification", Storage="_Notifications", ThisKey="ID", OtherKey="NotificationType")]
-		public EntitySet<Notification> Notifications
-		{
-			get
-			{
-				return this._Notifications;
-			}
-			set
-			{
-				this._Notifications.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Grade", Storage="_Grades", ThisKey="ID", OtherKey="GradeType")]
-		public EntitySet<Grade> Grades
-		{
-			get
-			{
-				return this._Grades;
-			}
-			set
-			{
-				this._Grades.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_FamilyMemberStudent1", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="RelationshipType")]
-		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
-		{
-			get
-			{
-				return this._FamilyMemberStudents;
-			}
-			set
-			{
-				this._FamilyMemberStudents.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Activities(Activity entity)
-		{
-			this.SendPropertyChanging();
-			entity.Lookup = this;
-		}
-		
-		private void detach_Activities(Activity entity)
-		{
-			this.SendPropertyChanging();
-			entity.Lookup = null;
-		}
-		
-		private void attach_Notifications(Notification entity)
-		{
-			this.SendPropertyChanging();
-			entity.Lookup = this;
-		}
-		
-		private void detach_Notifications(Notification entity)
-		{
-			this.SendPropertyChanging();
-			entity.Lookup = null;
-		}
-		
-		private void attach_Grades(Grade entity)
-		{
-			this.SendPropertyChanging();
-			entity.Lookup = this;
-		}
-		
-		private void detach_Grades(Grade entity)
-		{
-			this.SendPropertyChanging();
-			entity.Lookup = null;
-		}
-		
-		private void attach_FamilyMemberStudents(FamilyMemberStudent entity)
-		{
-			this.SendPropertyChanging();
-			entity.Lookup = this;
-		}
-		
-		private void detach_FamilyMemberStudents(FamilyMemberStudent entity)
-		{
-			this.SendPropertyChanging();
-			entity.Lookup = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Grades")]
 	public partial class Grade : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2376,9 +2154,9 @@ namespace com.pathshala.Models
 		
 		private EntityRef<Teacher> _Teacher;
 		
-		private EntityRef<Lookup> _Lookup;
-		
 		private EntityRef<School> _School;
+		
+		private EntityRef<Lookup> _Lookup;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2398,8 +2176,8 @@ namespace com.pathshala.Models
 		{
 			this._Students = new EntitySet<Student>(new Action<Student>(this.attach_Students), new Action<Student>(this.detach_Students));
 			this._Teacher = default(EntityRef<Teacher>);
-			this._Lookup = default(EntityRef<Lookup>);
 			this._School = default(EntityRef<School>);
+			this._Lookup = default(EntityRef<Lookup>);
 			OnCreated();
 		}
 		
@@ -2542,41 +2320,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Grade", Storage="_Lookup", ThisKey="GradeType", OtherKey="ID", IsForeignKey=true)]
-		public Lookup Lookup
-		{
-			get
-			{
-				return this._Lookup.Entity;
-			}
-			set
-			{
-				Lookup previousValue = this._Lookup.Entity;
-				if (((previousValue != value) 
-							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Lookup.Entity = null;
-						previousValue.Grades.Remove(this);
-					}
-					this._Lookup.Entity = value;
-					if ((value != null))
-					{
-						value.Grades.Add(this);
-						this._GradeType = value.ID;
-					}
-					else
-					{
-						this._GradeType = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Lookup");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Grade", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Grade", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
 		public School School
 		{
 			get
@@ -2606,6 +2350,40 @@ namespace com.pathshala.Models
 						this._SchoolID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("School");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Grade", Storage="_Lookup", ThisKey="GradeType", OtherKey="ID", IsForeignKey=true)]
+		public Lookup Lookup
+		{
+			get
+			{
+				return this._Lookup.Entity;
+			}
+			set
+			{
+				Lookup previousValue = this._Lookup.Entity;
+				if (((previousValue != value) 
+							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lookup.Entity = null;
+						previousValue.Grades.Remove(this);
+					}
+					this._Lookup.Entity = value;
+					if ((value != null))
+					{
+						value.Grades.Add(this);
+						this._GradeType = value.ID;
+					}
+					else
+					{
+						this._GradeType = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Lookup");
 				}
 			}
 		}
@@ -2836,7 +2614,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent1", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="StudentID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="StudentID")]
 		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
 		{
 			get
@@ -2917,7 +2695,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Student", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Student", Storage="_School", ThisKey="SchoolID", OtherKey="ID", IsForeignKey=true)]
 		public School School
 		{
 			get
@@ -3028,9 +2806,9 @@ namespace com.pathshala.Models
 		
 		private EntityRef<FamilyMember> _FamilyMember;
 		
-		private EntityRef<Lookup> _Lookup;
-		
 		private EntityRef<Student> _Student;
+		
+		private EntityRef<Lookup> _Lookup;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3051,8 +2829,8 @@ namespace com.pathshala.Models
 			this._CICOs = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs), new Action<CICO>(this.detach_CICOs));
 			this._CICOs1 = new EntitySet<CICO>(new Action<CICO>(this.attach_CICOs1), new Action<CICO>(this.detach_CICOs1));
 			this._FamilyMember = default(EntityRef<FamilyMember>);
-			this._Lookup = default(EntityRef<Lookup>);
 			this._Student = default(EntityRef<Student>);
+			this._Lookup = default(EntityRef<Lookup>);
 			OnCreated();
 		}
 		
@@ -3148,7 +2926,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="CheckedInBy")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="CheckedInBy")]
 		public EntitySet<CICO> CICOs
 		{
 			get
@@ -3161,7 +2939,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent1_CICO1", Storage="_CICOs1", ThisKey="ID", OtherKey="CheckedOutBy")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMemberStudent_CICO1", Storage="_CICOs1", ThisKey="ID", OtherKey="CheckedOutBy")]
 		public EntitySet<CICO> CICOs1
 		{
 			get
@@ -3174,7 +2952,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent1", Storage="_FamilyMember", ThisKey="FamilyMemberID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="FamilyMember_FamilyMemberStudent", Storage="_FamilyMember", ThisKey="FamilyMemberID", OtherKey="ID", IsForeignKey=true)]
 		public FamilyMember FamilyMember
 		{
 			get
@@ -3208,41 +2986,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_FamilyMemberStudent1", Storage="_Lookup", ThisKey="RelationshipType", OtherKey="ID", IsForeignKey=true)]
-		public Lookup Lookup
-		{
-			get
-			{
-				return this._Lookup.Entity;
-			}
-			set
-			{
-				Lookup previousValue = this._Lookup.Entity;
-				if (((previousValue != value) 
-							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Lookup.Entity = null;
-						previousValue.FamilyMemberStudents.Remove(this);
-					}
-					this._Lookup.Entity = value;
-					if ((value != null))
-					{
-						value.FamilyMemberStudents.Add(this);
-						this._RelationshipType = value.ID;
-					}
-					else
-					{
-						this._RelationshipType = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Lookup");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent1", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
 		public Student Student
 		{
 			get
@@ -3272,6 +3016,40 @@ namespace com.pathshala.Models
 						this._StudentID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_FamilyMemberStudent", Storage="_Lookup", ThisKey="RelationshipType", OtherKey="ID", IsForeignKey=true)]
+		public Lookup Lookup
+		{
+			get
+			{
+				return this._Lookup.Entity;
+			}
+			set
+			{
+				Lookup previousValue = this._Lookup.Entity;
+				if (((previousValue != value) 
+							|| (this._Lookup.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Lookup.Entity = null;
+						previousValue.FamilyMemberStudents.Remove(this);
+					}
+					this._Lookup.Entity = value;
+					if ((value != null))
+					{
+						value.FamilyMemberStudents.Add(this);
+						this._RelationshipType = value.ID;
+					}
+					else
+					{
+						this._RelationshipType = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Lookup");
 				}
 			}
 		}
@@ -3614,7 +3392,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="StudentID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_CICO", Storage="_CICOs", ThisKey="ID", OtherKey="StudentID")]
 		public EntitySet<CICO> CICOs
 		{
 			get
@@ -3627,7 +3405,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Teacher", Storage="_Teachers", ThisKey="ID", OtherKey="SchoolID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Teacher", Storage="_Teachers", ThisKey="ID", OtherKey="SchoolID")]
 		public EntitySet<Teacher> Teachers
 		{
 			get
@@ -3640,7 +3418,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Grade", Storage="_Grades", ThisKey="ID", OtherKey="SchoolID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Grade", Storage="_Grades", ThisKey="ID", OtherKey="SchoolID")]
 		public EntitySet<Grade> Grades
 		{
 			get
@@ -3653,7 +3431,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School1_Student", Storage="_Students", ThisKey="ID", OtherKey="SchoolID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="School_Student", Storage="_Students", ThisKey="ID", OtherKey="SchoolID")]
 		public EntitySet<Student> Students
 		{
 			get
@@ -3732,6 +3510,276 @@ namespace com.pathshala.Models
 		{
 			this.SendPropertyChanging();
 			entity.School = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Lookups")]
+	public partial class Lookup : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private string _Name;
+		
+		private string _Display;
+		
+		private System.Nullable<int> _SortOrder;
+		
+		private System.Nullable<bool> _IsActive;
+		
+		private EntitySet<Activity> _Activities;
+		
+		private EntitySet<Notification> _Notifications;
+		
+		private EntitySet<Grade> _Grades;
+		
+		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnDisplayChanging(string value);
+    partial void OnDisplayChanged();
+    partial void OnSortOrderChanging(System.Nullable<int> value);
+    partial void OnSortOrderChanged();
+    partial void OnIsActiveChanging(System.Nullable<bool> value);
+    partial void OnIsActiveChanged();
+    #endregion
+		
+		public Lookup()
+		{
+			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
+			this._Notifications = new EntitySet<Notification>(new Action<Notification>(this.attach_Notifications), new Action<Notification>(this.detach_Notifications));
+			this._Grades = new EntitySet<Grade>(new Action<Grade>(this.attach_Grades), new Action<Grade>(this.detach_Grades));
+			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Display", DbType="VarChar(500)")]
+		public string Display
+		{
+			get
+			{
+				return this._Display;
+			}
+			set
+			{
+				if ((this._Display != value))
+				{
+					this.OnDisplayChanging(value);
+					this.SendPropertyChanging();
+					this._Display = value;
+					this.SendPropertyChanged("Display");
+					this.OnDisplayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SortOrder", DbType="Int")]
+		public System.Nullable<int> SortOrder
+		{
+			get
+			{
+				return this._SortOrder;
+			}
+			set
+			{
+				if ((this._SortOrder != value))
+				{
+					this.OnSortOrderChanging(value);
+					this.SendPropertyChanging();
+					this._SortOrder = value;
+					this.SendPropertyChanged("SortOrder");
+					this.OnSortOrderChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsActive", DbType="Bit")]
+		public System.Nullable<bool> IsActive
+		{
+			get
+			{
+				return this._IsActive;
+			}
+			set
+			{
+				if ((this._IsActive != value))
+				{
+					this.OnIsActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsActive = value;
+					this.SendPropertyChanged("IsActive");
+					this.OnIsActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Activity", Storage="_Activities", ThisKey="ID", OtherKey="ActivityType")]
+		public EntitySet<Activity> Activities
+		{
+			get
+			{
+				return this._Activities;
+			}
+			set
+			{
+				this._Activities.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Notification", Storage="_Notifications", ThisKey="ID", OtherKey="NotificationType")]
+		public EntitySet<Notification> Notifications
+		{
+			get
+			{
+				return this._Notifications;
+			}
+			set
+			{
+				this._Notifications.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Grade", Storage="_Grades", ThisKey="ID", OtherKey="GradeType")]
+		public EntitySet<Grade> Grades
+		{
+			get
+			{
+				return this._Grades;
+			}
+			set
+			{
+				this._Grades.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="RelationshipType")]
+		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
+		{
+			get
+			{
+				return this._FamilyMemberStudents;
+			}
+			set
+			{
+				this._FamilyMemberStudents.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_Activities(Activity entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
+		}
+		
+		private void attach_Notifications(Notification entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_Notifications(Notification entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
+		}
+		
+		private void attach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_Grades(Grade entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
+		}
+		
+		private void attach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = this;
+		}
+		
+		private void detach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Lookup = null;
 		}
 	}
 }
