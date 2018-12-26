@@ -36,9 +36,6 @@ namespace com.pathshala.Models
     partial void InsertCICO(CICO instance);
     partial void UpdateCICO(CICO instance);
     partial void DeleteCICO(CICO instance);
-    partial void InsertMedical(Medical instance);
-    partial void UpdateMedical(Medical instance);
-    partial void DeleteMedical(Medical instance);
     partial void InsertNotification(Notification instance);
     partial void UpdateNotification(Notification instance);
     partial void DeleteNotification(Notification instance);
@@ -66,6 +63,9 @@ namespace com.pathshala.Models
     partial void InsertLookup(Lookup instance);
     partial void UpdateLookup(Lookup instance);
     partial void DeleteLookup(Lookup instance);
+    partial void InsertMedical(Medical instance);
+    partial void UpdateMedical(Medical instance);
+    partial void DeleteMedical(Medical instance);
     #endregion
 		
 		public PathshalaModelsDataContext() : 
@@ -111,14 +111,6 @@ namespace com.pathshala.Models
 			get
 			{
 				return this.GetTable<CICO>();
-			}
-		}
-		
-		public System.Data.Linq.Table<Medical> Medicals
-		{
-			get
-			{
-				return this.GetTable<Medical>();
 			}
 		}
 		
@@ -191,6 +183,14 @@ namespace com.pathshala.Models
 			get
 			{
 				return this.GetTable<Lookup>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Medical> Medicals
+		{
+			get
+			{
+				return this.GetTable<Medical>();
 			}
 		}
 	}
@@ -420,7 +420,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Activity", Storage="_Lookup", ThisKey="ActivityType", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Activity", Storage="_Lookup", ThisKey="ActivityType", OtherKey="ID", IsForeignKey=true)]
 		public Lookup Lookup
 		{
 			get
@@ -792,229 +792,6 @@ namespace com.pathshala.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Medicals")]
-	public partial class Medical : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ID;
-		
-		private System.Nullable<int> _StudentID;
-		
-		private string _Hospital;
-		
-		private string _MedicalDoctor;
-		
-		private string _MedicalPhone;
-		
-		private string _MedicalAddress;
-		
-		private EntityRef<Student> _Student;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDChanging(int value);
-    partial void OnIDChanged();
-    partial void OnStudentIDChanging(System.Nullable<int> value);
-    partial void OnStudentIDChanged();
-    partial void OnHospitalChanging(string value);
-    partial void OnHospitalChanged();
-    partial void OnMedicalDoctorChanging(string value);
-    partial void OnMedicalDoctorChanged();
-    partial void OnMedicalPhoneChanging(string value);
-    partial void OnMedicalPhoneChanged();
-    partial void OnMedicalAddressChanging(string value);
-    partial void OnMedicalAddressChanged();
-    #endregion
-		
-		public Medical()
-		{
-			this._Student = default(EntityRef<Student>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ID
-		{
-			get
-			{
-				return this._ID;
-			}
-			set
-			{
-				if ((this._ID != value))
-				{
-					this.OnIDChanging(value);
-					this.SendPropertyChanging();
-					this._ID = value;
-					this.SendPropertyChanged("ID");
-					this.OnIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
-		public System.Nullable<int> StudentID
-		{
-			get
-			{
-				return this._StudentID;
-			}
-			set
-			{
-				if ((this._StudentID != value))
-				{
-					if (this._Student.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStudentIDChanging(value);
-					this.SendPropertyChanging();
-					this._StudentID = value;
-					this.SendPropertyChanged("StudentID");
-					this.OnStudentIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hospital", DbType="VarChar(250)")]
-		public string Hospital
-		{
-			get
-			{
-				return this._Hospital;
-			}
-			set
-			{
-				if ((this._Hospital != value))
-				{
-					this.OnHospitalChanging(value);
-					this.SendPropertyChanging();
-					this._Hospital = value;
-					this.SendPropertyChanged("Hospital");
-					this.OnHospitalChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MedicalDoctor", DbType="VarChar(50)")]
-		public string MedicalDoctor
-		{
-			get
-			{
-				return this._MedicalDoctor;
-			}
-			set
-			{
-				if ((this._MedicalDoctor != value))
-				{
-					this.OnMedicalDoctorChanging(value);
-					this.SendPropertyChanging();
-					this._MedicalDoctor = value;
-					this.SendPropertyChanged("MedicalDoctor");
-					this.OnMedicalDoctorChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MedicalPhone", DbType="VarChar(15)")]
-		public string MedicalPhone
-		{
-			get
-			{
-				return this._MedicalPhone;
-			}
-			set
-			{
-				if ((this._MedicalPhone != value))
-				{
-					this.OnMedicalPhoneChanging(value);
-					this.SendPropertyChanging();
-					this._MedicalPhone = value;
-					this.SendPropertyChanged("MedicalPhone");
-					this.OnMedicalPhoneChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MedicalAddress", DbType="VarChar(500)")]
-		public string MedicalAddress
-		{
-			get
-			{
-				return this._MedicalAddress;
-			}
-			set
-			{
-				if ((this._MedicalAddress != value))
-				{
-					this.OnMedicalAddressChanging(value);
-					this.SendPropertyChanging();
-					this._MedicalAddress = value;
-					this.SendPropertyChanged("MedicalAddress");
-					this.OnMedicalAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Medical", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
-		public Student Student
-		{
-			get
-			{
-				return this._Student.Entity;
-			}
-			set
-			{
-				Student previousValue = this._Student.Entity;
-				if (((previousValue != value) 
-							|| (this._Student.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Student.Entity = null;
-						previousValue.Medicals.Remove(this);
-					}
-					this._Student.Entity = value;
-					if ((value != null))
-					{
-						value.Medicals.Add(this);
-						this._StudentID = value.ID;
-					}
-					else
-					{
-						this._StudentID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Student");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Notifications")]
 	public partial class Notification : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1224,7 +1001,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Notification", Storage="_Lookup", ThisKey="NotificationType", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Notification", Storage="_Lookup", ThisKey="NotificationType", OtherKey="ID", IsForeignKey=true)]
 		public Lookup Lookup
 		{
 			get
@@ -2354,7 +2131,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Grade", Storage="_Lookup", ThisKey="GradeType", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Grade", Storage="_Lookup", ThisKey="GradeType", OtherKey="ID", IsForeignKey=true)]
 		public Lookup Lookup
 		{
 			get
@@ -2439,9 +2216,9 @@ namespace com.pathshala.Models
 		
 		private EntitySet<Activity> _Activities;
 		
-		private EntitySet<Medical> _Medicals;
-		
 		private EntitySet<FamilyMemberStudent> _FamilyMemberStudents;
+		
+		private EntitySet<Medical> _Medicals;
 		
 		private EntityRef<Grade> _Grade;
 		
@@ -2468,8 +2245,8 @@ namespace com.pathshala.Models
 		public Student()
 		{
 			this._Activities = new EntitySet<Activity>(new Action<Activity>(this.attach_Activities), new Action<Activity>(this.detach_Activities));
-			this._Medicals = new EntitySet<Medical>(new Action<Medical>(this.attach_Medicals), new Action<Medical>(this.detach_Medicals));
 			this._FamilyMemberStudents = new EntitySet<FamilyMemberStudent>(new Action<FamilyMemberStudent>(this.attach_FamilyMemberStudents), new Action<FamilyMemberStudent>(this.detach_FamilyMemberStudents));
+			this._Medicals = new EntitySet<Medical>(new Action<Medical>(this.attach_Medicals), new Action<Medical>(this.detach_Medicals));
 			this._Grade = default(EntityRef<Grade>);
 			this._Person = default(EntityRef<Person>);
 			this._School = default(EntityRef<School>);
@@ -2601,19 +2378,6 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Medical", Storage="_Medicals", ThisKey="ID", OtherKey="StudentID")]
-		public EntitySet<Medical> Medicals
-		{
-			get
-			{
-				return this._Medicals;
-			}
-			set
-			{
-				this._Medicals.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="StudentID")]
 		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
 		{
@@ -2624,6 +2388,19 @@ namespace com.pathshala.Models
 			set
 			{
 				this._FamilyMemberStudents.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Medical1", Storage="_Medicals", ThisKey="ID", OtherKey="StudentID")]
+		public EntitySet<Medical> Medicals
+		{
+			get
+			{
+				return this._Medicals;
+			}
+			set
+			{
+				this._Medicals.Assign(value);
 			}
 		}
 		
@@ -2761,18 +2538,6 @@ namespace com.pathshala.Models
 			entity.Student = null;
 		}
 		
-		private void attach_Medicals(Medical entity)
-		{
-			this.SendPropertyChanging();
-			entity.Student = this;
-		}
-		
-		private void detach_Medicals(Medical entity)
-		{
-			this.SendPropertyChanging();
-			entity.Student = null;
-		}
-		
 		private void attach_FamilyMemberStudents(FamilyMemberStudent entity)
 		{
 			this.SendPropertyChanging();
@@ -2780,6 +2545,18 @@ namespace com.pathshala.Models
 		}
 		
 		private void detach_FamilyMemberStudents(FamilyMemberStudent entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = null;
+		}
+		
+		private void attach_Medicals(Medical entity)
+		{
+			this.SendPropertyChanging();
+			entity.Student = this;
+		}
+		
+		private void detach_Medicals(Medical entity)
 		{
 			this.SendPropertyChanging();
 			entity.Student = null;
@@ -3020,7 +2797,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_FamilyMemberStudent", Storage="_Lookup", ThisKey="RelationshipType", OtherKey="ID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_FamilyMemberStudent", Storage="_Lookup", ThisKey="RelationshipType", OtherKey="ID", IsForeignKey=true)]
 		public Lookup Lookup
 		{
 			get
@@ -3662,7 +3439,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Activity", Storage="_Activities", ThisKey="ID", OtherKey="ActivityType")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Activity", Storage="_Activities", ThisKey="ID", OtherKey="ActivityType")]
 		public EntitySet<Activity> Activities
 		{
 			get
@@ -3675,7 +3452,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Notification", Storage="_Notifications", ThisKey="ID", OtherKey="NotificationType")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Notification", Storage="_Notifications", ThisKey="ID", OtherKey="NotificationType")]
 		public EntitySet<Notification> Notifications
 		{
 			get
@@ -3688,7 +3465,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_Grade", Storage="_Grades", ThisKey="ID", OtherKey="GradeType")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_Grade", Storage="_Grades", ThisKey="ID", OtherKey="GradeType")]
 		public EntitySet<Grade> Grades
 		{
 			get
@@ -3701,7 +3478,7 @@ namespace com.pathshala.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup1_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="RelationshipType")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Lookup_FamilyMemberStudent", Storage="_FamilyMemberStudents", ThisKey="ID", OtherKey="RelationshipType")]
 		public EntitySet<FamilyMemberStudent> FamilyMemberStudents
 		{
 			get
@@ -3780,6 +3557,277 @@ namespace com.pathshala.Models
 		{
 			this.SendPropertyChanging();
 			entity.Lookup = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Medicals")]
+	public partial class Medical : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ID;
+		
+		private System.Nullable<int> _StudentID;
+		
+		private string _Hospital;
+		
+		private string _Doctor;
+		
+		private string _Phone;
+		
+		private string _Address;
+		
+		private System.Nullable<int> _MedicalType;
+		
+		private string _Notes;
+		
+		private EntityRef<Student> _Student;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDChanging(int value);
+    partial void OnIDChanged();
+    partial void OnStudentIDChanging(System.Nullable<int> value);
+    partial void OnStudentIDChanged();
+    partial void OnHospitalChanging(string value);
+    partial void OnHospitalChanged();
+    partial void OnDoctorChanging(string value);
+    partial void OnDoctorChanged();
+    partial void OnPhoneChanging(string value);
+    partial void OnPhoneChanged();
+    partial void OnAddressChanging(string value);
+    partial void OnAddressChanged();
+    partial void OnMedicalTypeChanging(System.Nullable<int> value);
+    partial void OnMedicalTypeChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
+    #endregion
+		
+		public Medical()
+		{
+			this._Student = default(EntityRef<Student>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ID
+		{
+			get
+			{
+				return this._ID;
+			}
+			set
+			{
+				if ((this._ID != value))
+				{
+					this.OnIDChanging(value);
+					this.SendPropertyChanging();
+					this._ID = value;
+					this.SendPropertyChanged("ID");
+					this.OnIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudentID", DbType="Int")]
+		public System.Nullable<int> StudentID
+		{
+			get
+			{
+				return this._StudentID;
+			}
+			set
+			{
+				if ((this._StudentID != value))
+				{
+					if (this._Student.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStudentIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudentID = value;
+					this.SendPropertyChanged("StudentID");
+					this.OnStudentIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Hospital", DbType="VarChar(250)")]
+		public string Hospital
+		{
+			get
+			{
+				return this._Hospital;
+			}
+			set
+			{
+				if ((this._Hospital != value))
+				{
+					this.OnHospitalChanging(value);
+					this.SendPropertyChanging();
+					this._Hospital = value;
+					this.SendPropertyChanged("Hospital");
+					this.OnHospitalChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Doctor", DbType="VarChar(150)")]
+		public string Doctor
+		{
+			get
+			{
+				return this._Doctor;
+			}
+			set
+			{
+				if ((this._Doctor != value))
+				{
+					this.OnDoctorChanging(value);
+					this.SendPropertyChanging();
+					this._Doctor = value;
+					this.SendPropertyChanged("Doctor");
+					this.OnDoctorChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="VarChar(15)")]
+		public string Phone
+		{
+			get
+			{
+				return this._Phone;
+			}
+			set
+			{
+				if ((this._Phone != value))
+				{
+					this.OnPhoneChanging(value);
+					this.SendPropertyChanging();
+					this._Phone = value;
+					this.SendPropertyChanged("Phone");
+					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(500)")]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this.OnAddressChanging(value);
+					this.SendPropertyChanging();
+					this._Address = value;
+					this.SendPropertyChanged("Address");
+					this.OnAddressChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MedicalType", DbType="Int")]
+		public System.Nullable<int> MedicalType
+		{
+			get
+			{
+				return this._MedicalType;
+			}
+			set
+			{
+				if ((this._MedicalType != value))
+				{
+					this.OnMedicalTypeChanging(value);
+					this.SendPropertyChanging();
+					this._MedicalType = value;
+					this.SendPropertyChanged("MedicalType");
+					this.OnMedicalTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="VarChar(500)")]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Student_Medical1", Storage="_Student", ThisKey="StudentID", OtherKey="ID", IsForeignKey=true)]
+		public Student Student
+		{
+			get
+			{
+				return this._Student.Entity;
+			}
+			set
+			{
+				Student previousValue = this._Student.Entity;
+				if (((previousValue != value) 
+							|| (this._Student.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Student.Entity = null;
+						previousValue.Medicals.Remove(this);
+					}
+					this._Student.Entity = value;
+					if ((value != null))
+					{
+						value.Medicals.Add(this);
+						this._StudentID = value.ID;
+					}
+					else
+					{
+						this._StudentID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Student");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
