@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace PathshalaWebApi.Areas.HelpPage.ModelDescriptions
+namespace com.pathshala.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

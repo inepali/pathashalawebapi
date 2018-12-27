@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using PathshalaWebApi.Areas.HelpPage.ModelDescriptions;
-using PathshalaWebApi.Areas.HelpPage.Models;
+using com.pathshala.Areas.HelpPage.ModelDescriptions;
+using com.pathshala.Areas.HelpPage.Models;
 
-namespace PathshalaWebApi.Areas.HelpPage
+namespace com.pathshala.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

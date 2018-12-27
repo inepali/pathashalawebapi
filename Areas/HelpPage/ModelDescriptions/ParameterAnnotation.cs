@@ -1,6 +1,6 @@
 using System;
 
-namespace PathshalaWebApi.Areas.HelpPage.ModelDescriptions
+namespace com.pathshala.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterAnnotation
     {

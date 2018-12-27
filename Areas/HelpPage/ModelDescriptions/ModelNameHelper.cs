@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace PathshalaWebApi.Areas.HelpPage.ModelDescriptions
+namespace com.pathshala.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

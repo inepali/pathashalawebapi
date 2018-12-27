@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
-using PathshalaWebApi.Areas.HelpPage.ModelDescriptions;
+using com.pathshala.Areas.HelpPage.ModelDescriptions;
 
-namespace PathshalaWebApi.Areas.HelpPage
+namespace com.pathshala.Areas.HelpPage
 {
     /// <summary>
     /// A custom <see cref="IDocumentationProvider"/> that reads the API documentation from an XML documentation file.

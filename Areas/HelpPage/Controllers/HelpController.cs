@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using PathshalaWebApi.Areas.HelpPage.ModelDescriptions;
-using PathshalaWebApi.Areas.HelpPage.Models;
+using com.pathshala.Areas.HelpPage.ModelDescriptions;
+using com.pathshala.Areas.HelpPage.Models;
 
-namespace PathshalaWebApi.Areas.HelpPage.Controllers
+namespace com.pathshala.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

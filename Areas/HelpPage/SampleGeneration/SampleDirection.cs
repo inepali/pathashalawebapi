@@ -1,4 +1,4 @@
-namespace PathshalaWebApi.Areas.HelpPage
+namespace com.pathshala.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

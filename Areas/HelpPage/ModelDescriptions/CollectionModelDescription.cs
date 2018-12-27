@@ -1,4 +1,4 @@
-namespace PathshalaWebApi.Areas.HelpPage.ModelDescriptions
+namespace com.pathshala.Areas.HelpPage.ModelDescriptions
 {
     public class CollectionModelDescription : ModelDescription
     {

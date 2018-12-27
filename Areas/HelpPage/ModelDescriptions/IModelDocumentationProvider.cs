@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace PathshalaWebApi.Areas.HelpPage.ModelDescriptions
+namespace com.pathshala.Areas.HelpPage.ModelDescriptions
 {
     public interface IModelDocumentationProvider
     {

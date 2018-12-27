@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace PathshalaWebApi.Areas.HelpPage
+namespace com.pathshala.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {
